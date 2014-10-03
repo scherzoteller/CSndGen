@@ -1,0 +1,5 @@
+03/10/2014
+What is done... few indeed:
+- quantizer mechanism
+- external launch of CSound (dirty hardcoded implementation, better to do while integrating spring or sth)
+- GIT project (to clean...)
