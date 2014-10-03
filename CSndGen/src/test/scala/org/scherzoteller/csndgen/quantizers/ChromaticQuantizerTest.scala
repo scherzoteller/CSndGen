@@ -1,4 +1,4 @@
-package org.scherzoteller.csdnGen.quantizers
+package org.scherzoteller.csndgen.quantizers
 
 import org.junit.Before
 import org.junit.Test

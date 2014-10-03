@@ -1,4 +1,4 @@
-package org.scherzoteller.csdnGen.tools
+package org.scherzoteller.csndgen.tools
 
 import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Before
@@ -13,7 +13,7 @@ class CSoundExecTest extends AssertionsForJUnit {
 
   }
   @Test def quantizeInBounds() {
-    assertEquals("exit code is not 0", 0, CSoundExec.execResource("/org/scherzoteller/csdnGen/files/verySimple.csd"))
+    assertEquals("exit code is not 0", 0, CSoundExec.execResource("/org/scherzoteller/csdngen/files/verySimple.csd"))
   }
 
 }
