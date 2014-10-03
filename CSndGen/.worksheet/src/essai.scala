@@ -1,7 +1,8 @@
 
 import scala.util.Random
+import org.apache.commons.io.FileUtils
 
-object essai {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(86); 
+object essai {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(125); 
   println("Welcome to the Scala worksheet");$skip(98); 
   
   val genRandomIntInBound = (start: Int, end: Int) => start + (Random.nextInt * (end - start));System.out.println("""genRandomIntInBound  : (Int, Int) => Int = """ + $show(genRandomIntInBound ));$skip(28); val res$0 = 
@@ -9,6 +10,5 @@ object essai {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._;
   
   val genRandomIntInBound2 = (start: Int, end: Int) => start + Random.nextInt(end - start);System.out.println("""genRandomIntInBound2  : (Int, Int) => Int = """ + $show(genRandomIntInBound2 ));$skip(29); val res$1 = 
 	genRandomIntInBound2(0,100);System.out.println("""res1: Int = """ + $show(res$1))}
-  
-  
+ 
 }
