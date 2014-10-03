@@ -1,0 +1,100 @@
+http://www.csounds.com/manual/html/f.html
+f Statement (or Function Table Statement)
+>> f p1  p2  p3  p4  p5 ... PMAX
+p1 -- Table number by which the stored function will be known. A negative number requests that the table be destroyed.
+p2 -- Action time of function generation (or destruction) in beats.
+p3 -- Size of function table (i.e. number of points) Must be a power of 2, or a power-of-2 plus 1 if this number is positive. Maximum table size is 16777216 (224) points.
+p4 -- Number of the GEN routine to be called (see GEN ROUTINES). A negative value will cause rescaling to be omitted.
+p5 ... PMAX -- Parameters whose meaning is determined by the particular GEN routine. 
+
+http://www.csounds.com/manual/html/ScoreGenRef.html
+GEN Routines
+
+GEN routines are used as data generators for function tables. When a function table is created using the f score statement the GEN function is given as its fourth argument. A negative GEN number implies that the function is not rescaled, and maintains its original values.
+Sine/Cosine Generators:
+
+    GEN09 - Composite waveforms made up of weighted sums of simple sinusoids.
+    GEN10 - Composite waveforms made up of weighted sums of simple sinusoids.
+http://www.csounds.com/manual/html/GEN10.html
+f # time size 10 str1 str2 str3 str4 ...
+size -- number of points in the table. Must be a power of 2 or power-of-2 plus 1 (see f statement).
+str1, str2, str3, etc. -- relative strengths of the fixed harmonic partial numbers 1,2,3, etc., beginning in p5. Partials not required should be given a strength of zero.
+    GEN11 - Additive set of cosine partials.
+    GEN19 - Composite waveforms made up of weighted sums of simple sinusoids.
+    GEN30 - Generates harmonic partials by analyzing an existing table.
+    GEN33 - Generate composite waveforms by mixing simple sinusoids.
+    GEN34 - Generate composite waveforms by mixing simple sinusoids.
+
+Line/Exponential Segment Generators:
+
+    GEN05 - Constructs functions from segments of exponential curves.
+    GEN06 - Generates a function comprised of segments of cubic polynomials.
+    GEN07 - Constructs functions from segments of straight lines.
+    GEN08 - Generate a piecewise cubic spline curve.
+    GEN16 - Creates a table from a starting value to an ending value.
+    GEN25 - Construct functions from segments of exponential curves in breakpoint fashion.
+    GEN27 - Construct functions from segments of straight lines in breakpoint fashion.
+
+File Access GEN Routines:
+
+    GEN01 - Transfers data from a soundfile into a function table.
+    GEN23 - Reads numeric values from a text file.
+    GEN28 - Reads a text file which contains a time-tagged trajectory.
+    GEN49 - Transfers data from an MP3 soundfile into a function table.
+
+Numeric Value Access GEN Routines
+
+    GEN02 - Transfers data from immediate pfields into a function table.
+    GEN17 - Creates a step function from given x-y pairs.
+    GEN52 - Creates an interleaved multichannel table from the specified source tables, in the format expected by the ftconv opcode.
+
+Window Function GEN Routines
+
+    GEN20 - Generates functions of different windows.
+
+Random Function GEN Routines
+
+    GEN21 - Generates tables of different random distributions.
+    GEN40 - Generates a random distribution using a distribution histogram.
+    GEN41 - Generates a random list of numerical pairs.
+    GEN42 - Generates a random distribution of discrete ranges of values.
+    GEN43 - Loads a PVOCEX file containing a PV analysis.
+
+Waveshaping GEN Routines
+
+    GEN03 - Generates a stored function table by evaluating a polynomial.
+    GEN13 - Stores a polynomial whose coefficients derive from the Chebyshev polynomials of the first kind.
+    GEN14 - Stores a polynomial whose coefficients derive from Chebyshevs of the second kind.
+    GEN15 - Creates two tables of stored polynomial functions.
+
+Amplitude Scaling GEN Routines
+
+    GEN04 - Generates a normalizing function.
+    GEN12 - Generates the log of a modified Bessel function of the second kind.
+    GEN24 - Reads numeric values from another allocated function-table and rescales them.
+
+Mixing GEN Routines
+
+    GEN18 - Writes composite waveforms made up of pre-existing waveforms.
+    GEN31 - Mixes any waveform specified in an existing table.
+    GEN32 - Mixes any waveform, resampled with either FFT or linear interpolation.
+
+Pitch and Tuning GEN Routines
+
+    GEN51 - fills a table with a fully customized micro-tuning scale, in the manner of Csound opcodes cpstun, cpstuni and cpstmid.
+
+Named GEN Routines
+
+Csound's GEN routines can be extended with GEN function plugins. There is currently a simple GEN plugin that provides exponential and hyperbolic tangent functions, and the sone function. There is also a generator called farey for the Farey sequence operations. These GEN functions are not called by number, but by name.
+
+    "tanh" - fills a table from a hyperbolic tangent formula.
+    "exp" - fills a table from an exponential formula.
+    "sone" - fills a table from a sone function formula.
+    "farey" - fills a table from a Farey sequence.
+    "wave" - fills a table from a wavelet transform.
+
+
+
+
+
+http://www.eumus.edu.uy/eme/ensenanza/electivas/csound/materiales/book_chapters/02nelson/02nelson.html

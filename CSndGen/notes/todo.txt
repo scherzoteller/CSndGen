@@ -1,0 +1,26 @@
+- trouver une gestion de fichiers un peu plus clean pour les tests
+- gestion des properties
+- générateurs de score
+	- d'abord complétement aléatoire sur les une liste de paramètres 
+	- les getRandom n'ont rien à faire dans le quantizer
+	- générateur à partir de fichiers lus comme des données brutes
+	- générateur à partir de load average
+	- générateur à partir de résultats de TUs
+	- proxy svn (même principe que le générateur de fichiers lus)
+	- capture d'évènements clavier souris
+	- proxy web (serait-il possible de capturer le son des vidéos youtube?)
+	- générateur à intégré à une vm...
+	- divers modèles: génétique, statistique, quantique(?), ...
+- générateurs d'orchestre
+- générateur multicanal: 1 source de donnée par canal
+- générateurs "temps réel": le son produit dure aussi longtemps que le temps de génération (lecture à la volée des différentes sources)
+- générateurs réversibles: on peut retrouver la donnée à partir du fichiers csound 
+		(métadonnées nécessaires pour savoir avec quelle générateur a été utilisé à tel ou tel endroit) 
+- quantizers pour les différents modes (blues, pentatonique, mineur, majeur, dorien, lydien, mixolydien, ... gammes microtonales, ...)
+- génération de fichiers midi? (via lilypond)
+
+
+
+Technos à regarder:
+- https://spring.io/blog/2012/12/10/introducing-spring-scala
+- https://spring.io/blog/2014/08/27/spring-data-dijkstra-sr4-released

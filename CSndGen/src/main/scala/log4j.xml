@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                       Log4j Configuration                             -->
+<!-- ===================================================================== -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <!-- ===================================================================== -->
+    <!--                   Application Loggers                                 -->
+    <!-- ===================================================================== -->
+    
+    <!-- ERROR appender : log only messages ERROR and higher levels  -->
+    <appender name="APP_ERR" class="org.apache.log4j.RollingFileAppender">
+         <param name="file" value="./csndgen_error.log"/>
+         <param name="MaxFileSize" value="10MB" />
+         <param name="MaxBackupIndex" value="5" />
+         <layout class="org.apache.log4j.PatternLayout" >
+            <param name="ConversionPattern" value="%d [%t] %-5p [%c] %x- %m%n"/>
+         </layout>
+         <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="ERROR"/>
+         </filter>
+    </appender>
+    
+    <!-- ALL appender : log all application messages -->
+    <appender name="APP_ALL" class="org.apache.log4j.RollingFileAppender">
+         <param name="file" value="./csndgen_out.log"/>
+         <param name="MaxFileSize" value="10MB" />
+         <param name="MaxBackupIndex" value="10" />
+         <layout class="org.apache.log4j.PatternLayout">
+             <param name="ConversionPattern" value="%d [%t] %-5p [%c] %x- %m%n"/>
+         </layout>
+    </appender>
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-5p %c{1} - %m%n" />
+		</layout>
+	</appender> 
+
+    <logger name="org.scherzoteller">
+        <level value="WARN"/>
+    </logger>
+
+    <!-- ================================= -->
+    <!--      Setup the Root category      -->
+    <!-- ================================= -->
+    <root>
+        <priority value="WARN" />
+        <appender-ref ref="console" />
+        <!-- 
+        <appender-ref ref="APP_ERR" />
+        <appender-ref ref="APP_ALL"/>
+         -->
+    </root>
+
+</log4j:configuration>

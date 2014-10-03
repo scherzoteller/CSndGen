@@ -1,0 +1,32 @@
+*** rules
+
+
+*** sucks
+http://stackoverflow.com/questions/4074944/best-practice-for-use-constants-in-scala-annotations
+Je cherchais bêtement quel était la bonne façon de définir des constantes à utiliser de façon globale dans mon appli.
+Bon c'est pas très fonctionnel/immutable je te l'accorde et puis j'ai fini par trouver mais bon, les commentaires 
+sur les réponses ne sont pas très rassurants....
+>Doesn't work (using Scala 2.10) –  sortega May 10 '13 at 8:10
+>Works for me in Scala 2.10.3! –  Erik Allik Mar 11 at 3:11
+>Doesn't work in Scala 2.10.4 :-( –  david.perez Jun 30 at 7:58
+>Doesn't work Scala 2.10.x –  Jus12 Aug 11 at 9:45 
+
+A chaque fois qu'on choppe une librairie faut s'assurer de l'avoir pour sa version de scala. Ex scalaTest adopte une convention
+artifact = scalatest_<noVersionScala> version = <versionScalaTest> dans maven... ça sent les ennuis tout ça.
+(rappel 2.11 est la dernière version, les pb de compatibilité binaire sont donc toujours d'actualité aujourd'hui 09/2014 alors que
+la techno est supposée mature...)
+
+Les outils de dev laissent encore à désirer:
+- dans le debugger, evaluation d'expression impossible (dans certains cas?)
+- la completion se comporte des fois un peu bizarrement
+- (mineur) dans eclipse (scalaIde) Refactor possible seulement si les fichiers sont sauvés
+- le build automatically est pas aussi efficace qu'en java (ex: clean nécessaire après un déplacement de classe vers un autre package)
+
+Le système d'inférence de type est un peu une usine à gaz, les messages sont pas toujours clairs.  
+
+globalement les refactos c'est pas ça...
+    val genRandomInBound = (start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start));
+    genRandomInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
+=> inline genRandomInBound
+	(start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start))(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
+	=> erreur de compil

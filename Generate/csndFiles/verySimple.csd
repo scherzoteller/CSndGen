@@ -2,9 +2,6 @@
 <CsOptions>
 csound -Wo C:\Graphane\eclipseKeplerScala\workspace\Generate\csndFiles\test.wav C:\Graphane\eclipseKeplerScala\workspace\Generate\csndFiles\temp.orc C:\Graphane\eclipseKeplerScala\workspace\Generate\csndFiles\temp.sco 
 </CsOptions>
-<!--
-csound -RWfo C:\Graphane\eclipseKeplerScala\workspace\Generate\csndFiles\test.wav C:\Graphane\eclipseKeplerScala\workspace\Generate\csndFiles\temp.orc C:\Graphane\eclipseKeplerScala\workspace\Generate\csndFiles\temp.sco 
--->
 <CsInstruments>
 sr = 44100
 ksmps = 10
