@@ -9,6 +9,10 @@ object essai {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._;
 	genRandomIntInBound(0,100);System.out.println("""res0: Int = """ + $show(res$0));$skip(95); 
   
   val genRandomIntInBound2 = (start: Int, end: Int) => start + Random.nextInt(end - start);System.out.println("""genRandomIntInBound2  : (Int, Int) => Int = """ + $show(genRandomIntInBound2 ));$skip(29); val res$1 = 
-	genRandomIntInBound2(0,100);System.out.println("""res1: Int = """ + $show(res$1))}
+	genRandomIntInBound2(0,100);System.out.println("""res1: Int = """ + $show(res$1));$skip(25); val res$2 = 
+	
+	
+	Random.nextInt(4)+1;System.out.println("""res2: Int = """ + $show(res$2));$skip(21); val res$3 = 
  
-}
+ Random.nextInt(4);System.out.println("""res3: Int = """ + $show(res$3))}
+ }

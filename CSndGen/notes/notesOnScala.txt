@@ -1,4 +1,5 @@
 *** rules
+Si eclipse supportait un peu mieux la syntaxe ce serait le bonheur...
 
 
 *** sucks
@@ -21,12 +22,21 @@ Les outils de dev laissent encore à désirer:
 - la completion se comporte des fois un peu bizarrement
 - (mineur) dans eclipse (scalaIde) Refactor possible seulement si les fichiers sont sauvés
 - le build automatically est pas aussi efficace qu'en java (ex: clean nécessaire après un déplacement de classe vers un autre package)
+- Il est passé où le menu source??? Alt+Shift+s nous amène sur celui de java qui forcément fait de la bouillasse sur une classe scala...
+- globalement les refactos c'est pas ça...
+	    val genRandomInBound = (start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start));
+	    genRandomInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
+	=> inline genRandomInBound
+		(start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start))(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
+		=> erreur de compil
+- Quand tu sauve un bout de code qui casse quelque chose tu peux te brosser pour avoir l'erreur en temps réel
+- le debug il donne quoi???? j'attends ça avec apréhension
 
 Le système d'inférence de type est un peu une usine à gaz, les messages sont pas toujours clairs.  
 
-globalement les refactos c'est pas ça...
-    val genRandomInBound = (start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start));
-    genRandomInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
-=> inline genRandomInBound
-	(start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start))(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
-	=> erreur de compil
+
+La javadoc c'est en option ou c'est juste eclipse qui est infoutu de la gérer??? Visiblement c'est pas gagné...
+http://stackoverflow.com/questions/10429817/viewing-scaladoc-in-eclipse
+
+
+

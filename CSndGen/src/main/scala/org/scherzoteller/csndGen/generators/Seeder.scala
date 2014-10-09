@@ -1,4 +1,4 @@
-package org.scherzoteller.csndGen
+package org.scherzoteller.csndGen.generators
 
 import org.scherzoteller.csndGen.quantizers.Quantizer
 

@@ -8,7 +8,7 @@
 	- générateur à partir de résultats de TUs
 	- proxy svn (même principe que le générateur de fichiers lus)
 	- capture d'évènements clavier souris
-	- proxy web (serait-il possible de capturer le son des vidéos youtube?)
+	- proxy web (serait-il possible de capturer le son des vidéos youtube? http://www.vidtomp3.com/ + un httpunit ou jsoup?)
 	- générateur à intégré à une vm...
 	- divers modèles: génétique, statistique, quantique(?), ...
 - générateurs d'orchestre
