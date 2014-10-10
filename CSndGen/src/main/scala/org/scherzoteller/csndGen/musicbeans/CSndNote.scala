@@ -28,6 +28,7 @@ class CSndNote(@BeanProperty instrId: Int, @BeanProperty start: String, @BeanPro
     for(anExtraPara <- otherParams) {
       sb.append(" ").append(anExtraPara)
     }
+    sb.append('\n');
     sb.toString
   }
 }

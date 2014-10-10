@@ -12,7 +12,7 @@ import org.scherzoteller.csndGen.musicbeans.CSndNote
 import org.scherzoteller.csndGen.musicbeans.CSndNote
 import scala.util.Random
 
-class GeneratorTest extends Generator {
+class DummyGenerator extends Generator {
   /**
    * Booooohhhhh this is mutable, non functional, not pretty, caca prout...
    * How do you manage state with stateless code?? that's a philosophical question...
@@ -40,7 +40,7 @@ class GeneratorTest extends Generator {
       
     	//new CSndNote(quantizer.getUnQuantizedInBoundRandowValue(), quantizer.getUnQuantizedInBoundRandowValue())
     }
-    val orchestraFile = new File(this.getClass().getResource("/fourAnalogWaves.orc").getFile());
+    val orchestraFile = new File(DummyGenerator.this.getClass().getResource("/fourAnalogWaves.orc").getFile());
     val state = new MyGenerationState();
     generate(out, getFileOrchestraGenerator(orchestraFile), genNote, state);
   }

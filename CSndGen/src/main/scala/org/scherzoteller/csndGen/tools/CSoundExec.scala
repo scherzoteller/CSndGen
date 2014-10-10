@@ -7,6 +7,10 @@ import java.lang.Boolean
 import org.apache.commons.io.FilenameUtils
 
 object CSoundExec {
+  // To manage properties:
+  // - http://scuff.googlecode.com/svn/trunk/scuff/docs/api/scuff/PropertiesFormatter.html (very basic but quite clever)
+  // - http://commons.apache.org/proper/commons-configuration/
+  // - spring
   private val PATH = "\"C:/Users/vloret.EUA/Desktop/Bordel/Softs Pluggins/snd/Csound6\""; // TODO properties
   def execResource(res: String): Int = {
     return exec(new File(classOf[CSoundExec].getResource(res).getFile()), false)
