@@ -32,8 +32,7 @@ object CSoundExec {
     // pure scala io lib available here: https://github.com/jesseeichar/scala-io
     // http://www.scala-sbt.org/0.13.0/api/index.html#sbt.IO$
     IOUtils.copy(p.getInputStream(), System.err);
-    return p.exitValue()
-
+    return p.waitFor();
   }
 }
 

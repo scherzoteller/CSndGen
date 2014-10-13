@@ -41,11 +41,11 @@ trait NoteQuantizer extends Quantizer{
   }
 
   def getUnQuantizedInBoundRandowValue(): BigDecimal = {
-    genRandomBigDecimalInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length - 1))
+    Quantizer.genRandomBigDecimalInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length - 1))
   }
 
   def getRandowValue(): BigDecimal = {
-    getAllowedVals()(genRandomIntInBound(0, getAllowedVals().length - 1))
+    getAllowedVals()(Quantizer.genRandomIntInBound(0, getAllowedVals().length - 1))
   }
 
 }

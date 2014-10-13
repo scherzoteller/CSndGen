@@ -9,11 +9,14 @@ trait Quantizer {
 
   def quantize(input: BigDecimal): BigDecimal
 
-  val genRandomBigDecimalInBound = (start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start));
-  val genRandomIntInBound = (start: Int, end: Int) => start + Random.nextInt(end - start);
-
   def getUnQuantizedInBoundRandowValue(): BigDecimal
 
   def getRandowValue(): BigDecimal;
 
+}
+
+
+object Quantizer {
+	val genRandomBigDecimalInBound = (start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start));
+	val genRandomIntInBound = (start: Int, end: Int) => start + Random.nextInt(end - start);
 }

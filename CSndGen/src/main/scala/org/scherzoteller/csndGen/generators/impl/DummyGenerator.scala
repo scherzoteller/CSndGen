@@ -11,6 +11,13 @@ import org.scherzoteller.csndGen.musicbeans.CSndNote
 import org.scherzoteller.csndGen.musicbeans.CSndNote
 import org.scherzoteller.csndGen.musicbeans.CSndNote
 import scala.util.Random
+import org.scherzoteller.csndGen.quantizers.BasicDurationQuantizer
+import org.scherzoteller.csndGen.quantizers.Quantizer
+import org.scherzoteller.csndGen.musicbeans.CSndFreq
+import org.scherzoteller.csndGen.musicbeans.CSndFreqAdditiveGen10
+import org.scherzoteller.csndGen.musicbeans.CSndFreqAdditiveGen10
+import org.scherzoteller.csndGen.musicbeans.CSndFreqStraightSegmentsGen7
+import org.scherzoteller.csndGen.musicbeans.CSndFreq
 
 class DummyGenerator extends Generator {
   /**
@@ -26,23 +33,39 @@ class DummyGenerator extends Generator {
     def noteGenerated(note: CSndNote) = {
       nbNotesToGen = nbNotesToGen - 1;
     }
+    
+    def tablesGenerated(tables: List[CSndFreq]) = {
+      // TODO: nothing here for the moment
+    }
   }
 
   def generate(out: OutputStream) = {
     val quantizer = new ChromaticQuantizer();
+    val quantum = BigDecimal("0.5");
+    val durationQuantizer = new BasicDurationQuantizer(quantum, 8, true);
+    val totalDuration = BigDecimal(70);
+
     val genNote = (out: OutputStream, state: GenerationState) => {
-      val instrument = Random.nextInt(4)+1;
-      val start = "+";
-      val duration = quantizer.getUnQuantizedInBoundRandowValue(); // create seeders for duration
+      val instrument = Random.nextInt(4) + 1;
+      val start = Quantizer.genRandomBigDecimalInBound(BigDecimal(0), totalDuration - quantum);
+      val startStr = String.valueOf(start);
+      val duration = durationQuantizer.getValidDuration(start, totalDuration);
       val pitch = quantizer.getUnQuantizedInBoundRandowValue();
       val amplitude = quantizer.getUnQuantizedInBoundRandowValue(); // create seeders for amplitude
-      new CSndNote(instrument, start, duration, pitch, amplitude)
-      
-    	//new CSndNote(quantizer.getUnQuantizedInBoundRandowValue(), quantizer.getUnQuantizedInBoundRandowValue())
+      new CSndNote(instrument, startStr, duration, pitch, amplitude)
     }
+
+    val genFreqs = (out: OutputStream, state: GenerationState) => {
+      val sine = new CSndFreqAdditiveGen10(1, 0, 4096, Array("1"))
+      val triangle = new CSndFreqStraightSegmentsGen7(2, 0, 16384, Array("0", "4096", "1", "8192", "-1", "4097", "0"))
+      val sawtooth = new CSndFreqStraightSegmentsGen7(3, 0, 16384, Array("-1", "16385", "1"))
+      val square = new CSndFreqStraightSegmentsGen7(4, 0, 16384, Array("1", "8192", "1", "0", "-1", "8192", "-1"))
+      sine :: (triangle :: (sawtooth :: (square :: Nil)))
+    }
+
     val orchestraFile = new File(DummyGenerator.this.getClass().getResource("/fourAnalogWaves.orc").getFile());
     val state = new MyGenerationState();
-    generate(out, getFileOrchestraGenerator(orchestraFile), genNote, state);
+    generate(out, getFileOrchestraGenerator(orchestraFile), genNote, genFreqs, state);
   }
 
 }
