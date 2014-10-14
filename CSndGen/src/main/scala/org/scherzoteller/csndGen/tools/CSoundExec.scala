@@ -13,9 +13,20 @@ object CSoundExec {
   // - spring
   private val PATH = "\"C:/Users/vloret.EUA/Desktop/Bordel/Softs Pluggins/snd/Csound6\""; // TODO properties
   def execResource(res: String): Int = {
-    return exec(new File(classOf[CSoundExec].getResource(res).getFile()), false)
+    new CSoundExec(new File(classOf[CSoundExec].getResource(res).getFile()), false).exec()
   }
   def exec(file: File, internalParams: Boolean): Int = {
+    new CSoundExec(file, internalParams).exec()
+  };
+}
+
+class CSoundExec(file: File, internalParams: Boolean) {
+	
+  def getWavFileName() = {
+    if(internalParams) throw new UnsupportedOperationException() else FilenameUtils.removeExtension(file.getCanonicalPath()) + ".wav"
+  }
+  
+  def exec(): Int = {
     if (internalParams)
       exec(new ProcessBuilder("csound.exe", file.getCanonicalPath()))
     else {
@@ -26,7 +37,7 @@ object CSoundExec {
   };
   private def exec(processBuilder: ProcessBuilder): Int = {
     val env = processBuilder.environment();
-    env.put("PATH", "%PATH%;" + PATH + "/bin");
+    env.put("PATH", "%PATH%;" + CSoundExec.PATH + "/bin");
     val p = processBuilder.start();
     // pure scala stream copy defined here: https://gist.github.com/ebruchez/781458
     // pure scala io lib available here: https://github.com/jesseeichar/scala-io
@@ -34,8 +45,5 @@ object CSoundExec {
     IOUtils.copy(p.getInputStream(), System.err);
     return p.waitFor();
   }
-}
-
-class CSoundExec {
-
+  
 }

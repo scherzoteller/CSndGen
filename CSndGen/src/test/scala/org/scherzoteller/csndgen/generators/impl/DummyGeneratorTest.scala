@@ -14,6 +14,7 @@ import org.scherzoteller.csndGen.tools.CSoundExec
 import org.junit.Assert
 import org.apache.commons.io.IOUtils
 import java.io.FileInputStream
+import org.scherzoteller.csndGen.spectrogram.SpectrogramUtils
 
 class DummyGeneratorTest extends AssertionsForJUnit {
   @Before def initialize() {
@@ -29,7 +30,11 @@ class DummyGeneratorTest extends AssertionsForJUnit {
     val genFileContent = IOUtils.toString(new FileInputStream(file))
     assertNotNull("File is empty", genFileContent)
     assertTrue("File is empty", genFileContent.length() > 0)
-    assertEquals("exit code is not 0", 0, CSoundExec.exec(file, false))
+    val executor = new CSoundExec(file, false)
+    assertEquals("exit code is not 0", 0, executor.exec());
+    SpectrogramUtils.renderSpectrogramFile(executor.getWavFileName())
+    
+    
   }
 
 }
