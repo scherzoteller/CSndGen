@@ -21,7 +21,9 @@ abstract class CSndFreq(@BeanProperty tableId: Int, @BeanProperty actionTime: In
     val sb = new StringBuilder();
     sb.append("f ").append(tableId)
       .append(" ").append(actionTime)
-      .append(" ").append(tableSize);
+      .append(" ").append(tableSize)
+      .append(" ").append(genRoutine)
+      ;
     for (anExtraPara <- otherParams) {
       sb.append(" ").append(anExtraPara)
     }
