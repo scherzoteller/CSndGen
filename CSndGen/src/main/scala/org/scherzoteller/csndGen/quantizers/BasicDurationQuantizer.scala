@@ -1,6 +1,8 @@
 package org.scherzoteller.csndGen.quantizers
 
 import scala.util.Random
+import scala.beans.BeanProperty
+import scala.math.BigDecimal
 
 /**
  * This quantizer is a basic one based on a quantum notion
@@ -12,7 +14,7 @@ import scala.util.Random
  * Note that polyrhythms can be be achieved with either several quantizers or getUnQuantizedInBoundRandowValue()
  * Musical quantizer would only help to provide a "valid" measure count (bouhhh traditional music is obsolete..., let's do polyrhytms, dodecaphonic pieces without fixed metrics...)
  */
-class BasicDurationQuantizer(durationQuantum: BigDecimal, maxDurationInQuantum: Int, isZeroAllowed: Boolean) extends Quantizer{
+class BasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanProperty maxDurationInQuantum: Int, @BeanProperty isZeroAllowed: Boolean, @BeanProperty totalDuration: Int) extends Quantizer{
 //  
   
   def getAllowedVals(): Array[BigDecimal] = {
@@ -38,20 +40,35 @@ class BasicDurationQuantizer(durationQuantum: BigDecimal, maxDurationInQuantum: 
       (input/durationQuantum).toInt * durationQuantum
     }
   }
-  
-  def getValidDuration(start: BigDecimal, totalDuration: BigDecimal): BigDecimal = {
-    val duration = getRandowValue();
-    if(start + duration <= totalDuration) duration else totalDuration - start
+  def getValidDurationTuple(start: BigDecimal): (Int, BigDecimal) = {
+    val durationTuple = getRandowValueTuple()
+    //val duration = getRandowValue()
+    if(start + durationTuple._2 <= (totalDuration*durationQuantum)) durationTuple else {
+      val duration = (totalDuration*durationQuantum) - start
+      ( (duration / durationQuantum).intValue, duration)
+    }
+  }
+  def getValidDuration(start: BigDecimal): BigDecimal = {
+    getValidDurationTuple(start)._2
   }
 
   def getUnQuantizedInBoundRandowValue(): BigDecimal = {
     Quantizer.genRandomBigDecimalInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length - 1))
   }
   
+  def getQuantizedStart(): BigDecimal = {
+    Quantizer.genRandomIntInBound(0,totalDuration-1) * durationQuantum
+  }
+  
   
 
   def getRandowValue(): BigDecimal = {
-    durationQuantum * Quantizer.genRandomIntInBound(getMinDurationInQuantum(), maxDurationInQuantum)
+    getRandowValueTuple()._2;
   }
 
+  def getRandowValueTuple(): (Int, BigDecimal) = {
+    val nbQuantum = Quantizer.genRandomIntInBound(getMinDurationInQuantum(), maxDurationInQuantum);
+    (nbQuantum, durationQuantum * nbQuantum)
+  }
+  
 }

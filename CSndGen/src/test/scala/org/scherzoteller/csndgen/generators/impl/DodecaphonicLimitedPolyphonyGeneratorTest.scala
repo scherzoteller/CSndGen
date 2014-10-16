@@ -15,15 +15,16 @@ import org.junit.Assert
 import org.apache.commons.io.IOUtils
 import java.io.FileInputStream
 import org.scherzoteller.csndGen.spectrogram.SpectrogramUtils
+import org.scherzoteller.csndGen.generators.impl.DodecaphonicLimitedPolyphonyGenerator
 
-class DummyGeneratorTest extends AssertionsForJUnit {
+class DodecaphonicLimitedPolyphonyGeneratorTest extends AssertionsForJUnit {
   @Before def initialize() {
 
   }
   @Test def generateAndExec() {
-    val gen = new DummyGenerator()
+    val gen = new DodecaphonicLimitedPolyphonyGenerator()
     val parentDir = "/org/scherzoteller/csdngen/files/"
-    val file = new File(new File(classOf[DummyGeneratorTest].getResource(parentDir).getFile()), "dummyGeneratorTest.csd")
+    val file = new File(new File(classOf[DodecaphonicLimitedPolyphonyGeneratorTest].getResource(parentDir).getFile()), "dodecaphonicLimitedPolyphonyGeneratorTest.csd")
     val out = new FileOutputStream(file)
     gen.generate(out)
     out.close()
