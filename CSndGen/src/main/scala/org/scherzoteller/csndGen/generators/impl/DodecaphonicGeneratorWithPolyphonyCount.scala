@@ -27,7 +27,7 @@ import org.scherzoteller.csndGen.quantizers.StatefulBasicDurationQuantizer
  * With the quantum based quantizer, we will be able to manage it with an array/list of remaining 
  * 
  */
-class DodecaphonicLimitedPolyphonyGenerator extends Generator {
+class DodecaphonicGeneratorWithPolyphonyCount extends Generator {
   /**
    * Booooohhhhh this is mutable, non functional, not pretty, caca prout...
    * How do you manage state with stateless code?? that's a philosophical question...

@@ -30,7 +30,24 @@ Les outils de dev laissent encore à désirer:
 		(start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start))(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
 		=> erreur de compil
 - Quand tu sauve un bout de code qui casse quelque chose tu peux te brosser pour avoir l'erreur en temps réel
-- le debug il donne quoi???? j'attends ça avec apréhension
+- le debug est plutôt limité:
+	=> step-to-step et autres fonctions de navigation ok, visualisation des variables du scope ok,
+	=> par contre tintin pour l'évaluation d'expression (en gros même situation que le debug d'une librairie dont les sources sont chargées en externe sans faire partie du workspace)
+	
+- exemple de blague du refactor d'eclipse:
+	Je veux renommer une classe et sans raison aucune...
+	- mes définitions de bigdecimals sont flinguées: 
+		val quantum = BigDecimal("0.5"); 
+		=> 
+		val quantum = ("0.5");
+	- mes littéraux de liste également (ça s'est produit 2 fois avant que je m'en rende compte, vu que la 1ère fois ça compilait encore...):
+		sine :: (triangle :: (sawtooth :: (square :: Nil)))
+		=>
+		sine :: sine ::triangle :: triangle ::sawtooth :: sawtooth ::square :: square :: Nil
+		=>
+		sine :: ssine ::sine ::trsine ::triangle :: ttriangle ::triangle ::satriangle ::sawtooth :: ssawtooth ::sawtooth ::sqsawtooth ::square :: ssquare ::square :: square :: Nil
+	=> WTF????????
+	Le comportement du copier collé de classe c'est aussi du grand n'importe quoi...  
 
 Le système d'inférence de type est un peu une usine à gaz, les messages sont pas toujours clairs.  
 
