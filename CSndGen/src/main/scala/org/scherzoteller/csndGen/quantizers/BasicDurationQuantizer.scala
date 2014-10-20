@@ -40,15 +40,15 @@ class BasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanPro
       (input/durationQuantum).toInt * durationQuantum
     }
   }
-  def getValidDurationTuple(start: BigDecimal): (Int, BigDecimal) = {
+  def getValidDurationTuple(start: Int): (Int, BigDecimal) = {
     val durationTuple = getRandowValueTuple()
     //val duration = getRandowValue()
-    if(start + durationTuple._2 <= (totalDuration*durationQuantum)) durationTuple else {
-      val duration = (totalDuration*durationQuantum) - start
+    if(start*durationQuantum + durationTuple._2 <= (totalDuration*durationQuantum)) durationTuple else {
+      val duration = (totalDuration*durationQuantum) - start*durationQuantum
       ( (duration / durationQuantum).intValue, duration)
     }
   }
-  def getValidDuration(start: BigDecimal): BigDecimal = {
+  def getValidDuration(start: Int): BigDecimal = {
     getValidDurationTuple(start)._2
   }
 
@@ -56,8 +56,8 @@ class BasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanPro
     Quantizer.genRandomBigDecimalInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length - 1))
   }
   
-  def getQuantizedStart(): BigDecimal = {
-    Quantizer.genRandomIntInBound(0,totalDuration-1) * durationQuantum
+  def getQuantizedStart(): Int = {
+    Quantizer.genRandomIntInBound(0,totalDuration-1)
   }
   
   

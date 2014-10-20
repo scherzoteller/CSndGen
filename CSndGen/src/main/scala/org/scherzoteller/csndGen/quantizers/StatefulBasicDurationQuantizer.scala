@@ -7,10 +7,10 @@ class StatefulBasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, 
   @BeanProperty
   protected val quantumFill: Array[Int] = StatefulBasicDurationQuantizer.initQuantumFill(totalDuration);;
   
-  override def getValidDurationTuple(start: BigDecimal): (Int, BigDecimal) = {
+  override def getValidDurationTuple(start: Int): (Int, BigDecimal) = {
     val duration = super.getValidDurationTuple(start);
-    val startInQuantum = (start/durationQuantum).intValue;
-    for(i <- startInQuantum until startInQuantum+duration._1){
+    //val startInQuantum = (start/durationQuantum).intValue;
+    for(i <- start until start+duration._1){
       quantumFill(i) = quantumFill(i) + 1
     }
     duration;

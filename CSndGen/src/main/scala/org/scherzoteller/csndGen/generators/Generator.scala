@@ -4,8 +4,8 @@ import java.io.OutputStream
 import java.io.File
 import org.apache.commons.io.IOUtils
 import java.io.FileInputStream
-import org.scherzoteller.csndGen.musicbeans.CSndNote
-import org.scherzoteller.csndGen.musicbeans.CSndFreq
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 
 /**
  * TODO refacto: lots of functions have access to the OutputStream, see if we could abstract it.

@@ -1,7 +1,7 @@
 package org.scherzoteller.csndGen.generators
 
-import org.scherzoteller.csndGen.musicbeans.CSndNote
-import org.scherzoteller.csndGen.musicbeans.CSndFreq
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 
 trait GenerationState {
 	def continueScore(): Boolean;

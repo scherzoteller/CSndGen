@@ -1,6 +1,7 @@
-package org.scherzoteller.csndGen.musicbeans
+package org.scherzoteller.csndGen.musicbeans.scoretokens
 
 import scala.beans.BeanProperty
+
 
 /**
  * Boooouuuuhhh I'm java contaminated I cannot leave without beans...!

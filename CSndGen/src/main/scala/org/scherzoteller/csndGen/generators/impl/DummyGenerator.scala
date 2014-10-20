@@ -4,20 +4,17 @@ import java.io.OutputStream
 import java.io.File
 import org.scherzoteller.csndGen.generators.Generator
 import org.scherzoteller.csndGen.generators.GenerationState
-import org.scherzoteller.csndGen.musicbeans.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.generators.GenerationState
 import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
-import org.scherzoteller.csndGen.musicbeans.CSndNote
-import org.scherzoteller.csndGen.musicbeans.CSndNote
-import org.scherzoteller.csndGen.musicbeans.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import scala.util.Random
 import org.scherzoteller.csndGen.quantizers.BasicDurationQuantizer
-import org.scherzoteller.csndGen.quantizers.Quantizer
-import org.scherzoteller.csndGen.musicbeans.CSndFreq
-import org.scherzoteller.csndGen.musicbeans.CSndFreqAdditiveGen10
-import org.scherzoteller.csndGen.musicbeans.CSndFreqAdditiveGen10
-import org.scherzoteller.csndGen.musicbeans.CSndFreqStraightSegmentsGen7
-import org.scherzoteller.csndGen.musicbeans.CSndFreq
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqAdditiveGen10
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqStraightSegmentsGen7
 
 class DummyGenerator extends Generator {
   /**
@@ -47,7 +44,7 @@ class DummyGenerator extends Generator {
 
     val genNote = (out: OutputStream, state: GenerationState) => {
       val instrument = Random.nextInt(4) + 1;
-      val start = Quantizer.genRandomBigDecimalInBound(BigDecimal(0), totalDuration - quantum);
+      val start = durationQuantizer.getQuantizedStart();
       val startStr = String.valueOf(start);
       val duration = durationQuantizer.getValidDuration(start);
       val pitch = quantizer.getUnQuantizedInBoundRandowValue();

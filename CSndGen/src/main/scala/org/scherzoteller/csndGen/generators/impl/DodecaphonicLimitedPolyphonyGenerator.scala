@@ -1,24 +1,18 @@
 package org.scherzoteller.csndGen.generators.impl
 
-import java.io.OutputStream
 import java.io.File
-import org.scherzoteller.csndGen.generators.Generator
-import org.scherzoteller.csndGen.generators.GenerationState
-import org.scherzoteller.csndGen.musicbeans.CSndNote
-import org.scherzoteller.csndGen.generators.GenerationState
-import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
-import org.scherzoteller.csndGen.musicbeans.CSndNote
-import org.scherzoteller.csndGen.musicbeans.CSndNote
-import org.scherzoteller.csndGen.musicbeans.CSndNote
+import java.io.OutputStream
+
 import scala.util.Random
-import org.scherzoteller.csndGen.quantizers.BasicDurationQuantizer
-import org.scherzoteller.csndGen.quantizers.Quantizer
-import org.scherzoteller.csndGen.musicbeans.CSndFreq
-import org.scherzoteller.csndGen.musicbeans.CSndFreqAdditiveGen10
-import org.scherzoteller.csndGen.musicbeans.CSndFreqAdditiveGen10
-import org.scherzoteller.csndGen.musicbeans.CSndFreqStraightSegmentsGen7
-import org.scherzoteller.csndGen.musicbeans.CSndFreq
-import org.scherzoteller.csndGen.quantizers.StatefulBasicDurationQuantizer
+
+import org.scherzoteller.csndGen.generators.GenerationState
+import org.scherzoteller.csndGen.generators.Generator
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqAdditiveGen10
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqStraightSegmentsGen7
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
+import org.scherzoteller.csndGen.quantizers.LimitedPolyphonyDurationQuantizer
 
 /**
  * this is actually a simple copy of DummyGenerator with quantized values (will match tempered notes)
@@ -53,7 +47,7 @@ class DodecaphonicLimitedPolyphonyGenerator extends Generator {
     val quantizer = new ChromaticQuantizer();
     val quantum = BigDecimal("0.5");
     val totalDuration = 140;
-    val durationQuantizer = new StatefulBasicDurationQuantizer(quantum, 8, true, totalDuration);
+    val durationQuantizer = new LimitedPolyphonyDurationQuantizer(quantum, 8, true, totalDuration, 5);
 
     val genNote = (out: OutputStream, state: GenerationState) => {
       val instrument = Random.nextInt(4) + 1;

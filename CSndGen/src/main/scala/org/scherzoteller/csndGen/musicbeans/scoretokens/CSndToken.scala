@@ -1,4 +1,4 @@
-package org.scherzoteller.csndGen.musicbeans
+package org.scherzoteller.csndGen.musicbeans.scoretokens
 
 import org.apache.commons.lang.StringUtils
 

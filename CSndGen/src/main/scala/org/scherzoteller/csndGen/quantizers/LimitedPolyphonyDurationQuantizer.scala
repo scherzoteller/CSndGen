@@ -6,13 +6,9 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
     @BeanProperty isZeroAllowed: Boolean, @BeanProperty totalDuration: Int, @BeanProperty maxPolyphony: Int)
   extends StatefulBasicDurationQuantizer(durationQuantum, maxDurationInQuantum, isZeroAllowed, totalDuration) {
   
-  // TODO rewrite BasicDurationQuantizer to use start as nb quantum. It is non sense to use some seconds (except for quantum)
-  
-  
-  
   // TODO (nothing to do with this class ;-)) http://bcomposes.wordpress.com/2012/05/04/basic-xml-processing-with-scala/
   
-  override def getValidDurationTuple(start: BigDecimal): (Int, BigDecimal) = {
+  override def getValidDurationTuple(start: Int): (Int, BigDecimal) = {
 	// TODO return the max possible duration at this start... not really useful but who knows
     super.getValidDurationTuple(start)
   }
