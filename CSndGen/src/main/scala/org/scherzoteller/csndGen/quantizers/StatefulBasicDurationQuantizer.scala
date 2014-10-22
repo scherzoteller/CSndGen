@@ -16,6 +16,24 @@ class StatefulBasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, 
     duration;
   }
   
+  
+  def getValidDurationTuple(start: Int, doFill: Boolean): (Int, BigDecimal) = {
+	  val duration = super.getValidDurationTuple(start);
+	  //val startInQuantum = (start/durationQuantum).intValue;
+	  if(doFill) {
+		  fill(start, duration);
+	  }
+	  duration;
+  }
+  
+  protected def fill(start: Int, duration: (Int, scala.math.BigDecimal)): Unit = {
+    for(i <- start until start+duration._1){
+			  quantumFill(i) = quantumFill(i) + 1;
+    }
+  }
+  
+  
+  
 }
 
 object StatefulBasicDurationQuantizer{

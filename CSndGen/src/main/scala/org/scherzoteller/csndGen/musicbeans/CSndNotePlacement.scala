@@ -9,5 +9,5 @@ import scala.beans.BeanProperty
  * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters? 
  */
 class CSndNotePlacement(@BeanProperty start: String, @BeanProperty duration: BigDecimal) { 
-
+	def this(start: Int, duration: BigDecimal) = this(String.valueOf(start), duration)
 }

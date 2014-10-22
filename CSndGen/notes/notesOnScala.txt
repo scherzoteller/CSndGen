@@ -48,8 +48,18 @@ Les outils de dev laissent encore à désirer:
 		sine :: ssine ::sine ::trsine ::triangle :: ttriangle ::triangle ::satriangle ::sawtooth :: ssawtooth ::sawtooth ::sqsawtooth ::square :: ssquare ::square :: square :: Nil
 	=> WTF????????
 	Le comportement du copier collé de classe c'est aussi du grand n'importe quoi...  
+http://www.scala-lang.org/old/node/10981.html
+http://goodstuff.im/yes-virginia-scala-is-hard
+The Eclipse plugin for Scala (or whatever it's called this week) sucks.  It has sucked for the 5 years I've been doing Scala and it's always "just about to get better" but it sucks.  
+IntelliJ's Scala support is reasonable for me.
+[...]
+If you're happy coding in Emacs or Vi or TextMate, Scala is okay and moving to IntelliJ is nice.
+=> bon ben je vais finir par l'acheter ce foutu soft...
+=> le David Pollak doit savoir de quoi il parle il est l'auteur de lift un framework web pour scala inspiré de ruby on rails.
+
 
 Le système d'inférence de type est un peu une usine à gaz, les messages sont pas toujours clairs.  
+http://goodstuff.im/yes-virginia-scala-is-hard again
 
 
 La javadoc c'est en option ou c'est juste eclipse qui est infoutu de la gérer??? Visiblement c'est pas gagné...
