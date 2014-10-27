@@ -22,13 +22,16 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
   }
   override def getValidDurationTuple(start: Int): (Int, BigDecimal) = {
 	  def returnValidTuple(start: Int, aDurationTuple: (Int, BigDecimal)): (Int, BigDecimal) = {
-		  val newFill = quantumFill(start) + 1;
-		  if (newFill <= maxPolyphony) {
-			  quantumFill(start) = newFill;
-			  incrementeTuple(returnValidTuple(start + 1, decrementTuple(aDurationTuple)))
-		  } else {
-			  (0, BigDecimal(0))
-		  }
+	    if(start >= totalDuration) (0, BigDecimal(0))
+	    else{
+	    	val newFill = quantumFill(start) + 1;
+	    	if (newFill <= maxPolyphony) {
+	    		quantumFill(start) = newFill;
+	    		incrementeTuple(returnValidTuple(start + 1, decrementTuple(aDurationTuple)))
+	    	} else {
+	    		(0, BigDecimal(0))
+	    	}
+	    }
 	  }
     returnValidTuple(start, super.getValidDurationTuple(start, false));
   }
