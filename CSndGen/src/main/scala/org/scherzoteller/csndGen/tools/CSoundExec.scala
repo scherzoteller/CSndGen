@@ -9,9 +9,8 @@ import org.apache.commons.io.FilenameUtils
 object CSoundExec {
   // To manage properties:
   // - http://scuff.googlecode.com/svn/trunk/scuff/docs/api/scuff/PropertiesFormatter.html (very basic but quite clever)
-  // - http://commons.apache.org/proper/commons-configuration/
+  // >> - http://commons.apache.org/proper/commons-configuration/
   // - spring
-  private val PATH = "\"C:/Users/vloret.EUA/Desktop/Bordel/Softs Pluggins/snd/Csound6\""; // TODO properties
   def execResource(res: String): Int = {
     new CSoundExec(new File(classOf[CSoundExec].getResource(res).getFile()), false).exec()
   }
@@ -37,7 +36,7 @@ class CSoundExec(file: File, internalParams: Boolean) {
   };
   private def exec(processBuilder: ProcessBuilder): Int = {
     val env = processBuilder.environment();
-    env.put("PATH", "%PATH%;" + CSoundExec.PATH + "/bin");
+    env.put("PATH", "%PATH%;" + CSndConfiguration.getBundle().getString("org.scherzoteller.csndGen.cSoundDir") + "/bin");
     val p = processBuilder.start();
     // pure scala stream copy defined here: https://gist.github.com/ebruchez/781458
     // pure scala io lib available here: https://github.com/jesseeichar/scala-io
