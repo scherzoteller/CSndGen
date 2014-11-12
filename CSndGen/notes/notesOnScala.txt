@@ -1,53 +1,66 @@
-*** rules
+
+
+*** Rules!
 Si eclipse supportait un peu mieux la syntaxe ce serait le bonheur...
+Un peu d'entrainement sous emacs Ã§a va pas faire de mal, tu verras aprÃ¨s quand t'enlÃ¨ve les gants de boxe, Ã§a va tout seul!
+Et comme il faut toujours une petite carotte en plus du bÃ¢ton, quand tu seras bien Ã  l'aise tu pourras faire du IntelliJ
+
+Pour le moment voilÃ  dÃ©jÃ  ce qu'on peut faire avec Emacs:
+D'abord!
+http://www.emacswiki.org/emacs/ScalaMode
+http://melpa.org/#/ (y a des trucs qui font rÃªver)
+Basic completion support: http://scabl.blogspot.fr/2011/07/scala-emacs-and-etags.html
+Basic refactoring: http://scabl.blogspot.fr/2011/07/bashemacs-rename-refactoring.html
++ use SBT, use git standalone
++ use emacs cygwin implementation to have a better access to symlinks...
 
 
-*** sucks
+*** Sucks!
 http://stackoverflow.com/questions/4074944/best-practice-for-use-constants-in-scala-annotations
-Je cherchais bêtement quel était la bonne façon de définir des constantes à utiliser de façon globale dans mon appli.
-Bon c'est pas très fonctionnel/immutable je te l'accorde et puis j'ai fini par trouver mais bon, les commentaires 
-sur les réponses ne sont pas très rassurants....
->Doesn't work (using Scala 2.10) –  sortega May 10 '13 at 8:10
->Works for me in Scala 2.10.3! –  Erik Allik Mar 11 at 3:11
->Doesn't work in Scala 2.10.4 :-( –  david.perez Jun 30 at 7:58
->Doesn't work Scala 2.10.x –  Jus12 Aug 11 at 9:45 
+Je cherchais bÃªtement quel Ã©tait la bonne faÃ§on de dÃ©finir des constantes Ã  utiliser de faÃ§on globale dans mon appli.
+Bon c'est pas trÃ¨s fonctionnel/immutable je te l'accorde et puis j'ai fini par trouver mais bon, les commentaires 
+sur les rÃ©ponses ne sont pas trÃ¨s rassurants....
+>Doesn't work (using Scala 2.10)   sortega May 10 '13 at 8:10
+>Works for me in Scala 2.10.3!   Erik Allik Mar 11 at 3:11
+>Doesn't work in Scala 2.10.4 :-(   david.perez Jun 30 at 7:58
+>Doesn't work Scala 2.10.x   Jus12 Aug 11 at 9:45 
 
 A chaque fois qu'on choppe une librairie faut s'assurer de l'avoir pour sa version de scala. Ex scalaTest adopte une convention
-artifact = scalatest_<noVersionScala> version = <versionScalaTest> dans maven... ça sent les ennuis tout ça.
-(rappel 2.11 est la dernière version, les pb de compatibilité binaire sont donc toujours d'actualité aujourd'hui 09/2014 alors que
-la techno est supposée mature...)
+artifact = scalatest_<noVersionScala> version = <versionScalaTest> dans maven... Ã§a sent les ennuis tout Ã§a.
+(rappel 2.11 est la derniÃ¨re version, les pb de compatibilitÃ© binaire sont donc toujours d'actualitÃ© aujourd'hui 09/2014 alors que
+la techno est supposÃ©e mature...)
 
-Les outils de dev laissent encore à désirer:
+Les outils de dev laissent encore Ã  dÃ©sirer:
 - dans le debugger, evaluation d'expression impossible (dans certains cas?)
 - la completion se comporte des fois un peu bizarrement
-- (mineur) dans eclipse (scalaIde) Refactor possible seulement si les fichiers sont sauvés
-- le build automatically est pas aussi efficace qu'en java (ex: clean nécessaire après un déplacement de classe vers un autre package)
-- Il est passé où le menu source??? Alt+Shift+s nous amène sur celui de java qui forcément fait de la bouillasse sur une classe scala...
-- globalement les refactos c'est pas ça...
+- (mineur) dans eclipse (scalaIde) Refactor possible seulement si les fichiers sont sauvÃ©s
+- le build automatically est pas aussi efficace qu'en java (ex: clean nÃ©cessaire aprÃ¨s un dÃ©placement de classe vers un autre package)
+- Il est passÃ© oÃ¹ le menu source??? Alt+Shift+s nous amÃ¨ne sur celui de java qui forcÃ©ment fait de la bouillasse sur une classe scala...
+- globalement les refactos c'est pas Ã§a...
 	    val genRandomInBound = (start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start));
 	    genRandomInBound(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
 	=> inline genRandomInBound
 		(start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start))(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
 		=> erreur de compil
-- Quand tu sauve un bout de code qui casse quelque chose tu peux te brosser pour avoir l'erreur en temps réel
-- le debug est plutôt limité:
+- Quand tu sauve un bout de code qui casse quelque chose tu peux te brosser pour avoir l'erreur en temps rÃ©el
+- le debug est plutôt limitÃ©:
 	=> step-to-step et autres fonctions de navigation ok, visualisation des variables du scope ok,
-	=> par contre tintin pour l'évaluation d'expression (en gros même situation que le debug d'une librairie dont les sources sont chargées en externe sans faire partie du workspace)
+	=> par contre tintin pour l'Ã©valuation d'expression (en gros mÃªme situation que le debug d'une librairie dont les sources sont chargÃ©es en externe sans faire partie du workspace)
 	
 - exemple de blague du refactor d'eclipse:
 	Je veux renommer une classe et sans raison aucune...
-	- mes définitions de bigdecimals sont flinguées: 
+	- mes dÃ©finitions de bigdecimals sont flinguÃ©es: 
 		val quantum = BigDecimal("0.5"); 
 		=> 
 		val quantum = ("0.5");
-	- mes littéraux de liste également (ça s'est produit 2 fois avant que je m'en rende compte, vu que la 1ère fois ça compilait encore...):
+	- mes littÃ©raux de liste Ã©galement (Ã§a s'est produit 2 fois avant que je m'en rende compte, vu que la 1Ã¨re fois Ã§a compilait encore...):
 		sine :: (triangle :: (sawtooth :: (square :: Nil)))
 		=>
 		sine :: sine ::triangle :: triangle ::sawtooth :: sawtooth ::square :: square :: Nil
 		=>
 		sine :: ssine ::sine ::trsine ::triangle :: ttriangle ::triangle ::satriangle ::sawtooth :: ssawtooth ::sawtooth ::sqsawtooth ::square :: ssquare ::square :: square :: Nil
 	=> WTF????????
-	Le comportement du copier collé de classe c'est aussi du grand n'importe quoi...  
+	Le comportement du copier collÃ© de classe c'est aussi du grand n'importe quoi...  
 http://www.scala-lang.org/old/node/10981.html
 http://goodstuff.im/yes-virginia-scala-is-hard
 The Eclipse plugin for Scala (or whatever it's called this week) sucks.  It has sucked for the 5 years I've been doing Scala and it's always "just about to get better" but it sucks.  
@@ -55,15 +68,35 @@ IntelliJ's Scala support is reasonable for me.
 [...]
 If you're happy coding in Emacs or Vi or TextMate, Scala is okay and moving to IntelliJ is nice.
 => bon ben je vais finir par l'acheter ce foutu soft...
-=> le David Pollak doit savoir de quoi il parle il est l'auteur de lift un framework web pour scala inspiré de ruby on rails.
+=> le David Pollak doit savoir de quoi il parle il est l'auteur de lift un framework web pour scala inspirÃ© de ruby on rails.
 
-
-Le système d'inférence de type est un peu une usine à gaz, les messages sont pas toujours clairs.  
-http://goodstuff.im/yes-virginia-scala-is-hard again
-
-
-La javadoc c'est en option ou c'est juste eclipse qui est infoutu de la gérer??? Visiblement c'est pas gagné...
+La javadoc c'est en option ou c'est juste eclipse qui est infoutu de la gÃ©rer??? Visiblement c'est pas gagnÃ©...
 http://stackoverflow.com/questions/10429817/viewing-scaladoc-in-eclipse
 
+*** Sucks mais il doit y avoir une bonne raison
+Interdiction d'utiliser les generics dans les fonctions anonymes
+http://stackoverflow.com/questions/2554531/how-can-i-define-an-anonymous-generic-scala-function
+Le coup d'hÃ©riter de Fonction0, Fonction1, Fonction2, ... c'est quand mÃªme un peu crado...
+J'imagine que l'explication se trouve quelque part dans l'obscure implÃ©mentation des generics dans la JVM... 
 
+
+*** Rules and sucks!
+
+Le systÃ¨me d'infÃ©rence de type est un peu une usine Ã  gaz, les messages sont pas toujours clairs.  
+http://goodstuff.im/yes-virginia-scala-is-hard again
+
+Certains sujets sur internet laissent songeurs: http://stackoverflow.com/questions/1722726/is-the-scala-2-8-collections-library-a-case-of-the-longest-suicide-note-in-hist?rq=1
+Bon c'est "Closed as non constructive" et vu le titre on comprend pourquoi mais bon... Ã  lire quand meme, au moins pour rire!
+"Despite whatever my wife and coworkers keep telling me, I don't think I'm an idiot"...
+Moi aussi en temps que non idiot il faut absolument que je comprenne ces signatures cryptiques et notamment que je comprenne Ã§a:
+def map[B, That](f: A => B)(implicit bf: CanBuildFrom[Repr, B, That]): That
+et comment sur cette exemple Scala arrive Ã  savoir qu'il doit transformer un BitSet en Set: http://stackoverflow.com/a/1728140/2022597
+http://www.scala-lang.org/old/sites/default/files/sids/dubochet/Mon,%202010-05-31,%2015:25/Storage%20of%20pickled%20Scala%20signatures%20in%20class%20files.pdf
+Exercices pratiques:
+http://stackoverflow.com/questions/23746053/difficulty-understanding-this-type-signature (un peu de currification pour rigoler un peu)
+def less(a: Int, b: Int) = a < b
+val listSorter = msort[Int](less) _
+listSorter(List(1, 2, 3))
+http://stackoverflow.com/questions/20163838/scala-future-oncomplete-method-signature-understanding (
+Ã§a les future on va attendre un peu...
 
