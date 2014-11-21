@@ -39,6 +39,7 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
   
   trait CircularSearchEval[T] extends Function2[T, Int, (T,Boolean)] {
      def apply(searchObj: T, position: Int): (T,Boolean)
+
   }
 
   private def circularSearchRec[T](startIndex: Int, index: Int, nbRemainingCycles: Int, data: T, evalFunc: CircularSearchEval[T]) : Int = {
@@ -84,18 +85,13 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
        }
     }
     val nbCycles = 1;
-    //FIXME val exactResult = circularSearch(randomDurationStart, 1, (0, randomNbQuantum, -1), searchExact)
+    
+    val exactResult = circularSearch(randomDurationStart, 1, new CircularSearchResult(0, randomNbQuantum, -1), searchExact)
 /* 
- * Used a workaround to use generics : http://stackoverflow.com/questions/2554531/how-can-i-define-an-anonymous-generic-scala-function
-but it seems that Scala doesn't want to be kind... why is this the parameter invariant...?
+ * Used a workaround to use generics : 
+http://stackoverflow.com/questions/2554531/how-can-i-define-an-anonymous-generic-scala-function
 http://stackoverflow.com/questions/2529184/difference-between-method-and-function-in-scala/2530007#2530007
 http://stackoverflow.com/questions/7399044/scala-upper-type-bounds-and-parent-classes
-[ERROR] C:\Users\vloret.EUA\git\LocalRepo\CSndGen\src\main\scala\org\scherzoteller\csndGen\quantizers\LimitedPolyphonyDurationQuantizer.scala:88: error: type mismatch;
-[INFO]  found   : LimitedPolyphonyDurationQuantizer.this.CircularSearchEval[org.scherzoteller.csndGen.quantizers.CircularSearchResult]
-[INFO]  required: LimitedPolyphonyDurationQuantizer.this.CircularSearchEval[Object]
-[INFO] Note: org.scherzoteller.csndGen.quantizers.CircularSearchResult <: Object, but trait CircularSearchEval is invariant in type T.
-[INFO] You may wish to define T as +T instead. (SLS 4.5)
-[INFO]     val exactResult = circularSearch(randomDurationStart, 1, (0, randomNbQuantum, -1), searchExact)
 */
     new CSndNotePlacement("0",BigDecimal(0))
 
