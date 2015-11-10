@@ -15,6 +15,11 @@ Basic refactoring: http://scabl.blogspot.fr/2011/07/bashemacs-rename-refactoring
 + use emacs cygwin implementation to have a better access to symlinks...
 
 
+(is there an alias mechanism in Scala? a bit like C typedef?)
+ Like any interesting question in Scala, the answer is yes! probably a variant of the generics/parametrization mechanisms
+ http://stackoverflow.com/questions/3687806/can-i-name-a-tuple-define-a-structure-in-scala-2-8
+The idea was to make a typedef for tuples but anyway, classes are better for naming (._1 ._2 is unreadable)
+
 *** Sucks!
 
 http://www.quora.com/What-are-some-of-the-negative-aspects-of-using-Scala

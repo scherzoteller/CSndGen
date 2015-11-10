@@ -59,10 +59,6 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
   private def circularSearch[T](startIndex: Int, nbCycles: Int, data: T, evalFunc: CircularSearchFunction[T] ): Int = circularSearchRec(startIndex, startIndex, nbCycles+1, data, evalFunc)
 
   
-  // ITEM Vince tuples are evil... this is not readable use only when this make sense (is there an alias mechanism in Scala? a bit like C typedef?)
-  // Like any interesting question in Scala, the answer is yes! probably a variant of the generics/parametrization mechanisms
-  // http://stackoverflow.com/questions/3687806/can-i-name-a-tuple-define-a-structure-in-scala-2-8
-
   def getValidNotePlacement(totalNbNotes: Int, nbRemainingNotes: Int): CSndNotePlacement = {
     val randomPosition = Quantizer.genRandomIntInBound(0, totalDuration);
     if(LimitedPolyphonyDurationQuantizer.LOG.isDebugEnabled() && totalNbNotes > maxPolyphony*(maxDurationInQuantum-getMinDurationInQuantum())) {
