@@ -37,12 +37,12 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
   }
 
   
-  trait CircularSearchEval[T] extends Function2[T, Int, (T,Boolean)] {
+  trait CircularSearchFunction[T] extends Function2[T, Int, (T,Boolean)] {
      def apply(searchObj: T, position: Int): (T,Boolean)
 
   }
 
-  private def circularSearchRec[T](startIndex: Int, index: Int, nbRemainingCycles: Int, data: T, evalFunc: CircularSearchEval[T]) : Int = {
+  private def circularSearchRec[T](startIndex: Int, index: Int, nbRemainingCycles: Int, data: T, evalFunc: CircularSearchFunction[T]) : Int = {
     val onStartIndex = (startIndex == index)
     val newNbRemainingCycles = if (startIndex == index)  nbRemainingCycles-1 else nbRemainingCycles
     if(!(onStartIndex && (newNbRemainingCycles == 0))){
@@ -56,7 +56,7 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
        -1
     }
   }
-  private def circularSearch[T](startIndex: Int, nbCycles: Int, data: T, evalFunc: CircularSearchEval[T] ): Int = circularSearchRec(startIndex, startIndex, nbCycles+1, data, evalFunc)
+  private def circularSearch[T](startIndex: Int, nbCycles: Int, data: T, evalFunc: CircularSearchFunction[T] ): Int = circularSearchRec(startIndex, startIndex, nbCycles+1, data, evalFunc)
 
   
   // ITEM Vince tuples are evil... this is not readable use only when this make sense (is there an alias mechanism in Scala? a bit like C typedef?)
@@ -79,7 +79,7 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
 
     // NB passing positionWhereFound as input is not logical, we don't have it... just to allow generic signature with same input/output
     // positionWhereFound could be used to pass index but it would be quite confusing...
-    val searchExact = new CircularSearchEval[CircularSearchResult]{
+    val searchExact = new CircularSearchFunction[CircularSearchResult]{
        def apply(circularSearchResult: CircularSearchResult, position: Int): (CircularSearchResult,Boolean) = {
           (circularSearchResult, true)
        }

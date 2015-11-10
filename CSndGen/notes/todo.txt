@@ -1,26 +1,26 @@
 - trouver une gestion de fichiers un peu plus clean pour les tests
 - gestion des properties
-- générateurs de score
-	- d'abord complétement aléatoire sur les une liste de paramètres 
-	- les getRandom n'ont rien à faire dans le quantizer
-	- générateur à partir de fichiers lus comme des données brutes
-	- générateur à partir de load average
-	- générateur à partir de résultats de TUs
-	- proxy svn (même principe que le générateur de fichiers lus)
-	- capture d'évènements clavier souris
-	- proxy web (serait-il possible de capturer le son des vidéos youtube? http://www.vidtomp3.com/ + un httpunit ou jsoup?)
-	- générateur à intégré à une vm...
-	- divers modèles: génétique, statistique, quantique(?), ...
-- générateurs d'orchestre
-- générateur multicanal: 1 source de donnée par canal
-- générateurs "temps réel": le son produit dure aussi longtemps que le temps de génération (lecture à la volée des différentes sources)
-- générateurs réversibles: on peut retrouver la donnée à partir du fichiers csound 
-		(métadonnées nécessaires pour savoir avec quelle générateur a été utilisé à tel ou tel endroit) 
-- quantizers pour les différents modes (blues, pentatonique, mineur, majeur, dorien, lydien, mixolydien, ... gammes microtonales, ...)
-- génération de fichiers midi? (via lilypond)
+- gÃ©nÃ©rateurs de score
+	- d'abord complÃ¨tement alÃ©atoire sur les une liste de paramÃ¨tres 
+	- les getRandom n'ont rien Ã  faire dans le quantizer
+	- gÃ©nÃ©rateur Ã  partir de fichiers lus comme des donnÃ©es brutes
+	- gÃ©nÃ©rateur Ã  partir de load average
+	- gÃ©nÃ©rateur Ã  partir de rÃ©sultats de TUs
+	- proxy svn (mÃªme principe que le gÃ©nÃ©rateur de fichiers lus)
+	- capture d'Ã©vÃ¨nements clavier souris
+	- proxy web (serait-il possible de capturer le son des vidÃ©os youtube? http://www.vidtomp3.com/ + un httpunit ou jsoup?)
+	- gÃ©nÃ©rateur Ã  intÃ©grer Ã  une vm...
+	- divers modÃ¨les: gÃ©nÃ©tique, statistique, quantique(?), ...
+- gÃ©nÃ©rateurs d'orchestre
+- gÃ©nÃ©rateur multicanal: 1 source de donnÃ©e par canal
+- gÃ©nÃ©rateurs "temps rÃ©el": le son produit dure aussi longtemps que le temps de gÃ©nÃ©ration (lecture Ã  la volÃ©e des diffÃ©rentes sources)
+- gÃ©nÃ©rateurs rÃ©versibles: on peut retrouver la donnÃ©e Ã  partir du fichiers csound 
+		(mÃ©tadonnÃ©es nÃ©cessaires pour savoir avec quelle gÃ©nÃ©rateur a Ã©tÃ© utilisÃ© Ã  tel ou tel endroit) 
+- quantizers pour les diffï¿½rents modes (blues, pentatonique, mineur, majeur, dorien, lydien, mixolydien, ... gammes microtonales, ...)
+- gÃ©nÃ©ration de fichiers midi? (via lilypond)
 
 
 
-Technos à regarder:
+Technos Ã  regarder:
 - https://spring.io/blog/2012/12/10/introducing-spring-scala
 - https://spring.io/blog/2014/08/27/spring-data-dijkstra-sr4-released

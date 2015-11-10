@@ -3,7 +3,7 @@ package org.scherzoteller.csndGen.tools
 import org.apache.commons.io.IOUtils
 import scala.io.Source
 import java.io.File
-import java.lang.Boolean
+import scala.Boolean
 import org.apache.commons.io.FilenameUtils
 
 object CSoundExec {
