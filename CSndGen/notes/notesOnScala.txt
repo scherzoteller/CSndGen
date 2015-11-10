@@ -16,6 +16,9 @@ Basic refactoring: http://scabl.blogspot.fr/2011/07/bashemacs-rename-refactoring
 
 
 *** Sucks!
+
+http://www.quora.com/What-are-some-of-the-negative-aspects-of-using-Scala
+
 http://stackoverflow.com/questions/4074944/best-practice-for-use-constants-in-scala-annotations
 Je cherchais bêtement quel était la bonne façon de définir des constantes à utiliser de façon globale dans mon appli.
 Bon c'est pas très fonctionnel/immutable je te l'accorde et puis j'ai fini par trouver mais bon, les commentaires 
@@ -43,7 +46,7 @@ Les outils de dev laissent encore à désirer:
 		(start: BigDecimal, end: BigDecimal) => start + (Random.nextDouble * (end - start))(getAllowedVals()(0), getAllowedVals()(getAllowedVals().length))
 		=> erreur de compil
 - Quand tu sauve un bout de code qui casse quelque chose tu peux te brosser pour avoir l'erreur en temps réel
-- le debug est plut�t limité:
+- le debug est plutôt limité:
 	=> step-to-step et autres fonctions de navigation ok, visualisation des variables du scope ok,
 	=> par contre tintin pour l'évaluation d'expression (en gros même situation que le debug d'une librairie dont les sources sont chargées en externe sans faire partie du workspace)
 	
@@ -84,6 +87,7 @@ J'imagine que l'explication se trouve quelque part dans l'obscure implémentatio
 
 Le système d'inférence de type est un peu une usine à gaz, les messages sont pas toujours clairs.  
 http://goodstuff.im/yes-virginia-scala-is-hard again
+https://issues.scala-lang.org/browse/SI-2712
 
 Certains sujets sur internet laissent songeurs: http://stackoverflow.com/questions/1722726/is-the-scala-2-8-collections-library-a-case-of-the-longest-suicide-note-in-hist?rq=1
 Bon c'est "Closed as non constructive" et vu le titre on comprend pourquoi mais bon... à lire quand meme, au moins pour rire!
