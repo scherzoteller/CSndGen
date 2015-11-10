@@ -23,10 +23,10 @@ class BasicDurationQuantizerTest extends AssertionsForJUnit {
     
     for(a <- 1 until 1000){
       val rTuple = durationQuantizer.getRandowValueTuple();
-      assertTrue(rTuple._1 >= 0)
-      assertTrue(rTuple._1 <= 70)
-      assertTrue(rTuple._2 >= 0)
-      assertTrue(rTuple._2 <= BigDecimal(70)*quantum)
+      assertTrue(rTuple.getStart >= 0)
+      assertTrue(rTuple.getStart <= 70)
+      assertTrue(rTuple.getDuration >= 0)
+      assertTrue(rTuple.getDuration <= BigDecimal(70)*quantum)
     }
   }
 }

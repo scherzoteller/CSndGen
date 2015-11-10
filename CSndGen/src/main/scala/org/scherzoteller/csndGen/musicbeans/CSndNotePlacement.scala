@@ -6,8 +6,12 @@ import scala.beans.BeanProperty
  * Boooouuuuhhh I'm java contaminated I cannot leave without beans...!
  * @see http://stackoverflow.com/questions/9673233/how-is-the-pojo-javabean-pattern-treated-in-scala
  * 
- * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters? 
+ * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters?
+ * 
+ * FIXME those @BeanProperty annotations cause warning and don't work!
+ *  
  */
-class CSndNotePlacement(@BeanProperty start: String, @BeanProperty duration: BigDecimal) { 
-	def this(start: Int, duration: BigDecimal) = this(String.valueOf(start), duration)
+class CSndNotePlacement(@BeanProperty start: Int, @BeanProperty duration: BigDecimal) { 
+  def getDuration: BigDecimal = this.duration
+  def getStart: Int = this.start
 }

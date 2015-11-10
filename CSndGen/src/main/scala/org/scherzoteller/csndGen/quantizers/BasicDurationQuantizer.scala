@@ -3,6 +3,7 @@ package org.scherzoteller.csndGen.quantizers
 import scala.util.Random
 import scala.beans.BeanProperty
 import scala.math.BigDecimal
+import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
 
 /**
  * This quantizer is a basic one based on a quantum notion
@@ -33,16 +34,17 @@ class BasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanPro
       (input / durationQuantum).toInt * durationQuantum
     }
   }
-  def getValidDurationTuple(start: Int): (Int, BigDecimal) = {
+  def getValidDurationTuple(start: Int): CSndNotePlacement = {
     val durationTuple = getRandowValueTuple()
     //val duration = getRandowValue()
-    if (start * durationQuantum + durationTuple._2 <= (totalDuration * durationQuantum)) durationTuple else {
+    if (start * durationQuantum + durationTuple.getDuration <= (totalDuration * durationQuantum)) durationTuple else {
       val duration = (totalDuration * durationQuantum) - start * durationQuantum
-      ((duration / durationQuantum).intValue, duration)
+      new CSndNotePlacement((duration / durationQuantum).intValue, duration)
+      
     }
   }
   def getValidDuration(start: Int): BigDecimal = {
-    getValidDurationTuple(start)._2
+    getValidDurationTuple(start).getDuration
   }
 
   def getUnQuantizedInBoundRandowValue(): BigDecimal = {
@@ -54,12 +56,12 @@ class BasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanPro
   }
 
   def getRandowValue(): BigDecimal = {
-    getRandowValueTuple()._2;
+    getRandowValueTuple().getDuration;
   }
 
-  def getRandowValueTuple(): (Int, BigDecimal) = {
+  def getRandowValueTuple(): CSndNotePlacement = {
     val nbQuantum = Quantizer.genRandomIntInBound(getMinDurationInQuantum(), maxDurationInQuantum);
-    (nbQuantum, durationQuantum * nbQuantum)
+    new CSndNotePlacement(nbQuantum, durationQuantum * nbQuantum)
   }
 
 }

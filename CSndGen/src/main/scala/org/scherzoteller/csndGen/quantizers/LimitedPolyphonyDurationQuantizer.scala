@@ -14,22 +14,22 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
 
   // TODO ((nothing to do with this class ;-)) http://bcomposes.wordpress.com/2012/05/04/basic-xml-processing-with-scala/
 
-  private def decrementTuple(aDurationTuple: (Int, BigDecimal)): (Int, BigDecimal) = {
-    (aDurationTuple._1 - 1, aDurationTuple._2 - durationQuantum)
+  private def decrementTuple(aDurationTuple: CSndNotePlacement): CSndNotePlacement = {
+    new CSndNotePlacement(aDurationTuple.getStart - 1, aDurationTuple.getDuration - durationQuantum)
   }
-  private def incrementeTuple(aDurationTuple: (Int, BigDecimal)): (Int, BigDecimal) = {
-    (aDurationTuple._1 + 1, aDurationTuple._2 + durationQuantum)
+  private def incrementeTuple(aDurationTuple: CSndNotePlacement): CSndNotePlacement = {
+    new CSndNotePlacement(aDurationTuple.getStart + 1, aDurationTuple.getDuration + durationQuantum)
   }
-  override def getValidDurationTuple(start: Int): (Int, BigDecimal) = {
-	  def returnValidTuple(start: Int, aDurationTuple: (Int, BigDecimal)): (Int, BigDecimal) = {
-	    if(start >= totalDuration) (0, BigDecimal(0))
+  override def getValidDurationTuple(start: Int): CSndNotePlacement = {
+	  def returnValidTuple(start: Int, aDurationTuple: CSndNotePlacement): CSndNotePlacement = {
+	    if(start >= totalDuration) new CSndNotePlacement(0, BigDecimal(0))
 	    else{
 	    	val newFill = quantumFill(start) + 1;
 	    	if (newFill <= maxPolyphony) {
 	    		quantumFill(start) = newFill;
 	    		incrementeTuple(returnValidTuple(start + 1, decrementTuple(aDurationTuple)))
 	    	} else {
-	    		(0, BigDecimal(0))
+	    		new CSndNotePlacement(0, BigDecimal(0))
 	    	}
 	    }
 	  }
@@ -73,7 +73,7 @@ class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecima
     // - generate random duration do a 1st search of free space for this duration, and fallback to the biggest free space if not found (might be too greedy, maybe durations should be chosen to maintain an average around nbQuantum/nbNotes)
     // => search of free space should be circular starting from a random position 
     val randomDurationStart = getQuantizedStart()
-    val randomNbQuantum = getRandowValueTuple()._1
+    val randomNbQuantum = getRandowValueTuple().getStart
 
     // Note this is early design of the circular search for 
 
@@ -93,7 +93,7 @@ http://stackoverflow.com/questions/2554531/how-can-i-define-an-anonymous-generic
 http://stackoverflow.com/questions/2529184/difference-between-method-and-function-in-scala/2530007#2530007
 http://stackoverflow.com/questions/7399044/scala-upper-type-bounds-and-parent-classes
 */
-    new CSndNotePlacement("0",BigDecimal(0))
+    new CSndNotePlacement(0,BigDecimal(0))
 
   }
   

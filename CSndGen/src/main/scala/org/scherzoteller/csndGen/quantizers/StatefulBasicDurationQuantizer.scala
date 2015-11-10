@@ -1,23 +1,24 @@
 package org.scherzoteller.csndGen.quantizers
 
 import scala.beans.BeanProperty
+import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
 
 class StatefulBasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanProperty maxDurationInQuantum: Int, @BeanProperty isZeroAllowed: Boolean, @BeanProperty totalDuration: Int)
   extends BasicDurationQuantizer(durationQuantum, maxDurationInQuantum, isZeroAllowed, totalDuration) {
   @BeanProperty
   protected val quantumFill: Array[Int] = StatefulBasicDurationQuantizer.initQuantumFill(totalDuration);;
   
-  override def getValidDurationTuple(start: Int): (Int, BigDecimal) = {
+  override def getValidDurationTuple(start: Int): CSndNotePlacement = {
     val duration = super.getValidDurationTuple(start);
     //val startInQuantum = (start/durationQuantum).intValue;
-    for(i <- start until start+duration._1){
+    for(i <- start until start+duration.getStart){
       quantumFill(i) = quantumFill(i) + 1
     }
     duration;
   }
   
   
-  def getValidDurationTuple(start: Int, doFill: Boolean): (Int, BigDecimal) = {
+  def getValidDurationTuple(start: Int, doFill: Boolean): CSndNotePlacement = {
 	  val duration = super.getValidDurationTuple(start);
 	  //val startInQuantum = (start/durationQuantum).intValue;
 	  if(doFill) {
@@ -26,8 +27,8 @@ class StatefulBasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, 
 	  duration;
   }
   
-  protected def fill(start: Int, duration: (Int, scala.math.BigDecimal)): Unit = {
-    for(i <- start until start+duration._1){
+  protected def fill(start: Int, duration: CSndNotePlacement): Unit = {
+    for(i <- start until start+duration.getStart){
 			  quantumFill(i) = quantumFill(i) + 1;
     }
   }

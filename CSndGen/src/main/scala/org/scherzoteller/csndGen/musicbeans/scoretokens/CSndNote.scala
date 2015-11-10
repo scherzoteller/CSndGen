@@ -9,7 +9,7 @@ import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
  * 
  * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters? 
  */
-class CSndNote(@BeanProperty instrId: Int, @BeanProperty start: String, @BeanProperty duration: BigDecimal, @BeanProperty otherParams: Array[String]) extends CSndNotePlacement(start, duration) with CSndScoreToken {
+class CSndNote(@BeanProperty instrId: Int, @BeanProperty start: String, @BeanProperty duration: BigDecimal, @BeanProperty otherParams: Array[String]) extends CSndNotePlacement(start.toInt, duration) with CSndScoreToken {
   /*
   def pitch: BigDecimal
   def pitch_=(pitch:BigDecimal)

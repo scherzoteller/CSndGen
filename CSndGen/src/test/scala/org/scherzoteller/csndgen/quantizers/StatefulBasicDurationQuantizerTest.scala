@@ -24,10 +24,10 @@ class StatefulBasicDurationQuantizerTest extends AssertionsForJUnit {
     
     for(a <- 1 until 1000){
       val rTuple = durationQuantizer.getValidDurationTuple(durationQuantizer.getQuantizedStart());
-      assertTrue(rTuple._1 >= 0)
-      assertTrue(rTuple._1 <= 70)
-      assertTrue(rTuple._2 >= 0)
-      assertTrue(rTuple._2 <= BigDecimal(70)*quantum)
+      assertTrue(rTuple.getStart >= 0)
+      assertTrue(rTuple.getStart <= 70)
+      assertTrue(rTuple.getDuration >= 0)
+      assertTrue(rTuple.getDuration <= BigDecimal(70)*quantum)
     }
     // http://www.codecommit.com/blog/scala/quick-explanation-of-scalas-syntax
     //val nbNotes = durationQuantizer.getQuantumFill().reduceLeft((a: Int, b: Int) => {a+b})
