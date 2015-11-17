@@ -2,17 +2,16 @@ package org.scherzoteller.csndGen.generators.impl
 
 import java.io.File
 import java.io.OutputStream
-
 import scala.util.Random
-
-import org.scherzoteller.csndGen.generators.GenerationState
-import org.scherzoteller.csndGen.generators.Generator
+import org.scherzoteller.csndGen.states.GenerationState
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqAdditiveGen10
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqStraightSegmentsGen7
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
 import org.scherzoteller.csndGen.quantizers.LimitedPolyphonyDurationQuantizer
+import org.scherzoteller.csndGen.states.DodecaphonicGeneratorState
+import org.scherzoteller.csndGen.generators.MutableGenerator
 
 /**
  * this is actually a simple copy of DummyGenerator with quantized values (will match tempered notes)
@@ -21,28 +20,7 @@ import org.scherzoteller.csndGen.quantizers.LimitedPolyphonyDurationQuantizer
  * With the quantum based quantizer, we will be able to manage it with an array/list of remaining 
  * 
  */
-class DodecaphonicLimitedPolyphonyGenerator extends Generator {
-  /**
-   * Booooohhhhh this is mutable, non functional, not pretty, caca prout...
-   * How do you manage state with stateless code?? that's a philosophical question...
-   */
-  class MyGenerationState extends GenerationState {
-    var nbNotesToGen: Int = 150
-    var tables: List[CSndFreq] = Nil
-    
-    def continueScore(): Boolean = {
-      return nbNotesToGen > 0;
-    }
-
-    def noteGenerated(note: CSndNote) = {
-      nbNotesToGen = nbNotesToGen - 1;
-    }
-    
-    def tablesGenerated(tables: List[CSndFreq]) = {
-      this.tables = tables
-    }
-  }
-
+class DodecaphonicLimitedPolyphonyGenerator extends MutableGenerator {
   def generate(out: OutputStream) = {
     val quantizer = new ChromaticQuantizer();
     val quantum = BigDecimal("0.5");
@@ -68,7 +46,7 @@ class DodecaphonicLimitedPolyphonyGenerator extends Generator {
     }
 
     val orchestraFile = new File(this.getClass().getResource("/fourAnalogWaves.orc").getFile());
-    val state = new MyGenerationState();
+    val state = new DodecaphonicGeneratorState();
     generate(out, getFileOrchestraGenerator(orchestraFile), genNote, genFreqs, state);
     
     val qFill = durationQuantizer.getQuantumFill()

@@ -15,3 +15,8 @@ class CSndNotePlacement(@BeanProperty start: Int, @BeanProperty duration: BigDec
   def getDuration: BigDecimal = this.duration // FIXME to remove when found a workaround for eclipse
   def getStart: Int = this.start // FIXME to remove when found a workaround for eclipse
 }
+
+object CSndNotePlacement{
+  val nilObjectInst = new CSndNotePlacement(0, BigDecimal(0))
+  def nilObject(): CSndNotePlacement = { nilObjectInst };
+}

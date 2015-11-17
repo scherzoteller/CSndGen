@@ -26,17 +26,17 @@ class CSoundExec(file: File, internalParams: Boolean) {
   }
   
   def exec(): Int = {
+    val exeAbsPath = CSndConfiguration.getBundle().getString("org.scherzoteller.csndGen.cSoundDir").replaceAll("/", "\\\\") + "\\bin\\csound.exe";
+    System.err.println(exeAbsPath)
     if (internalParams)
-      exec(new ProcessBuilder("csound.exe", file.getCanonicalPath()))
+      exec(new ProcessBuilder(exeAbsPath, file.getCanonicalPath()))
     else {
       val wavFile = FilenameUtils.removeExtension(file.getCanonicalPath()) + ".wav"
-      exec(new ProcessBuilder("csound.exe", file.getCanonicalPath(), "-Wo", wavFile))
+      exec(new ProcessBuilder(exeAbsPath, file.getCanonicalPath(), "-Wo", wavFile))
     }
-
-  };
+  }
+  
   private def exec(processBuilder: ProcessBuilder): Int = {
-    val env = processBuilder.environment();
-    env.put("PATH", "%PATH%;" + CSndConfiguration.getBundle().getString("org.scherzoteller.csndGen.cSoundDir") + "/bin");
     val p = processBuilder.start();
     // pure scala stream copy defined here: https://gist.github.com/ebruchez/781458
     // pure scala io lib available here: https://github.com/jesseeichar/scala-io

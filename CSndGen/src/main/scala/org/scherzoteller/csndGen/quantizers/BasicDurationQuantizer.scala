@@ -52,7 +52,11 @@ class BasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanPro
   }
 
   def getQuantizedStart(): Int = {
-    Quantizer.genRandomIntInBound(0, totalDuration - 1)
+    getQuantizedStart(0)
+  }
+
+  def getQuantizedStart(min: Int): Int = {
+    Quantizer.genRandomIntInBound(min, totalDuration - 1)
   }
 
   def getRandowValue(): BigDecimal = {

@@ -6,15 +6,17 @@ import org.apache.commons.io.IOUtils
 import java.io.FileInputStream
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
+import org.scherzoteller.csndGen.states.GenerationState
 
 /**
  * TODO refacto: lots of functions have access to the OutputStream, see if we could abstract it.
+ * TODO refacto bis: rethink in functional immutable way...
  * Build a hierarchy of CSoundTokens That will contain ne Note(rename to CSound Note, correspond to the i statement)
  * 
  * genNote should not need it anymore in the nominal case (only produced one note and nothing else) 
- *
  */
-trait Generator {
+@Deprecated
+trait MutableGenerator {
   def genScore(out: OutputStream, genNote: (OutputStream, GenerationState) => CSndNote, state: GenerationState) = {
     while (state.continueScore) {
       {
@@ -29,7 +31,7 @@ trait Generator {
     }
   }
 
-  def genTablesSection(out: OutputStream, genTables: (OutputStream, GenerationState) => List[CSndFreq], state: GenerationState) = {
+  def genTablesSection(out: OutputStream, genTables: (OutputStream, GenerationState) => List[CSndFreq], state: GenerationState): GenerationState = {
     val tables = genTables(out, state);
     out.write(tables.map((freq) => {freq.getValueAsString()}).mkString(";\r\n").getBytes());
     out.write(';');
