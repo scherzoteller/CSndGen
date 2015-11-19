@@ -16,5 +16,19 @@ object GenerationState {
     def tablesGenerated(freqs: List[CSndFreq]) = { this }
   };
 
+  val nNotesState = new GenerationState() {
+	  def continueScore(): Boolean = { false }
+	  def noteGenerated(note: CSndNote)  = { this }
+	  def tablesGenerated(freqs: List[CSndFreq]) = { this }
+  };
+  
   def nullState(): GenerationState = { nullStateInst }
+  
+  def nbNotesState(_nbNotes: Int): GenerationState = new GenerationState() {
+    var nbNotes: Int = _nbNotes;
+	  def continueScore(): Boolean = { nbNotes = nbNotes - 1; nbNotes > 0 }
+	  def noteGenerated(note: CSndNote)  = { this }
+	  def tablesGenerated(freqs: List[CSndFreq]) = { this }
+  };
+  
 }

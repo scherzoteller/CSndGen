@@ -1,22 +1,24 @@
 package org.scherzoteller.csndGen.generators.impl
 
 import java.io.File
-import org.scherzoteller.csndGen.states.GenerationState
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
-import org.scherzoteller.csndGen.states.GenerationState
-import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import java.io.OutputStream
+
 import scala.util.Random
-import org.scherzoteller.csndGen.quantizers.BasicDurationQuantizer
+
+import org.scherzoteller.csndGen.generators.Generator
+import org.scherzoteller.csndGen.generators.MutableGenerator
+import org.scherzoteller.csndGen.generators.out.CSndOutput
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqAdditiveGen10
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqStraightSegmentsGen7
-import org.scherzoteller.csndGen.states.DodecaphonicGeneratorState
-import org.scherzoteller.csndGen.generators.MutableGenerator
-import org.scherzoteller.csndGen.generators.Generator
-import org.scherzoteller.csndGen.generators.out.CSndOutput
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.quantizers.BasicDurationQuantizer
+import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
+import org.scherzoteller.csndGen.states.GenerationState
+import org.scherzoteller.csndGen.states.GenerationState
 
 class DummyGenerator extends Generator {
   def generate(out: CSndOutput) = {
@@ -44,7 +46,7 @@ class DummyGenerator extends Generator {
     }
 
     val orchestraFile = new File(DummyGenerator.this.getClass().getResource("/fourAnalogWaves.orc").getFile());
-    val state = GenerationState.nullState(); 
+    val state = GenerationState.nbNotesState(10); 
     generate(out, getFileOrchestraGenerator(orchestraFile), genNote, genFreqs, state);
   }
 

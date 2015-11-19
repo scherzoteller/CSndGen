@@ -9,7 +9,8 @@ import org.apache.commons.io.IOUtils
 import java.io.File
 
 class CSndOutput(output: OutputStream) {
-  val END_OF_INSTRUCTION = ";\r\n";
+	val END_OF_LINE = "\r\n";
+  val END_OF_INSTRUCTION = ";"+END_OF_LINE;
   def write(note: CSndScoreToken) = {
     output.write(note.getValueAsString().getBytes());
   }
@@ -17,11 +18,15 @@ class CSndOutput(output: OutputStream) {
 
   def writeLn(note: CSndScoreToken) = {
     write(note);
-    newLine();
+    endOfInstruction();
+  }
+  
+  private def endOfInstruction() = {
+	  output.write(END_OF_INSTRUCTION.getBytes());
   }
   
   private def newLine() = {
-	  output.write(END_OF_INSTRUCTION.getBytes());
+	  output.write(END_OF_LINE.getBytes());
   }
   
   private def writeTag(tag: String) = {
@@ -37,23 +42,17 @@ class CSndOutput(output: OutputStream) {
 	  output.write('>');
   }
   
-  def encapsulate(tag: String, doInside : CSndOutput  => Unit ) = {
-    writeTag(tag)
-    newLine()
-    doInside.apply(this)
-    newLine()
-    writeEndTag(tag)
-    newLine()
-  }
-  def encapsulate(tag: String ): (CSndOutput => Unit) => Unit = {
-    return (doInside : CSndOutput => Unit) => {
-    	encapsulate(tag, doInside)
-    }
+  def encapsulate(tag: String )(doInside: => Unit): Unit = {
+		  writeTag(tag)
+		  newLine()
+		  doInside
+		  newLine()
+		  writeEndTag(tag)
+		  newLine()
   }
   
   def writeFile(file: File) = {
     IOUtils.copy(new FileInputStream(file), output)
   }
-  
 }
 

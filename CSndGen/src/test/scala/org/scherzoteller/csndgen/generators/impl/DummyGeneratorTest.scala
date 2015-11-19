@@ -34,8 +34,5 @@ class DummyGeneratorTest extends AssertionsForJUnit {
     val executor = new CSoundExec(file, false)
     assertEquals("exit code is not 0", 0, executor.exec());
     SpectrogramUtils.renderSpectrogramFile(executor.getWavFileName())
-    
-    
   }
-
 }

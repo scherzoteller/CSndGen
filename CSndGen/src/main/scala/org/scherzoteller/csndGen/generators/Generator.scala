@@ -39,7 +39,6 @@ trait Generator {
                genTables: (CSndOutput, GenerationState) => List[CSndFreq],
                state: GenerationState) = {
     // TODO propagate state to pass immutable
-    // TODO can we simplify the syntax ?
     // Immutable doesn't seems so adapted to xml structure... this will force us to store string values... annoying
     // Let's introduce the concept of future generators? gas storage plant / kludge? 
     // The concept of parallelism might be interesting however:
@@ -47,18 +46,18 @@ trait Generator {
     // - reactive generators will have some speed state evolution steps and longer but differed writing (NB: not very adapted to limited polyphony since for that state contains the )
     
     
-    out.encapsulate("CsoundSynthesizer")(out => {
-      out.encapsulate("CsOptions")(out => {
+    out.encapsulate("CsoundSynthesizer"){
+      out.encapsulate("CsOptions"){
         //empty section
-      })
-      out.encapsulate("CsInstruments")(out => {
+      }
+      out.encapsulate("CsInstruments"){
         genOrchestra(out, state)
-      })
-      out.encapsulate("CsScore")(out => {
+      }
+      out.encapsulate("CsScore"){
         genTablesSection(out, genTables, state);
         genScore(out, genNote, state);
-      })
-    })
+      }
+    }
   }
   /**
    * To be redefined usually by a call to
