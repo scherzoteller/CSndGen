@@ -3,7 +3,6 @@ package org.scherzoteller.csndGen.generators.impl
 import java.io.OutputStream
 import java.io.File
 import org.scherzoteller.csndGen.generators.MutableGenerator
-import org.scherzoteller.csndGen.states.GenerationState
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.states.GenerationState
 import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer

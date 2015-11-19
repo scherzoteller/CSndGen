@@ -1,7 +1,6 @@
 package org.scherzoteller.csndGen.states
 
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
-import org.scherzoteller.csndGen.states.GenerationState
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
 

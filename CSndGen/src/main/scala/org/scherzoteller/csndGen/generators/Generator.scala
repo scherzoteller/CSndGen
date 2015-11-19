@@ -43,8 +43,10 @@ trait Generator {
     // Let's introduce the concept of future generators? gas storage plant / kludge? 
     // The concept of parallelism might be interesting however:
     // - basic generators will simply bufferize their output and won't be optimized/reactive (long 1st step: "state evolution+bufferizing" -  short 2nd step: "writing buffer")
-    // - reactive generators will have some speed state evolution steps and longer but differed writing (NB: not very adapted to limited polyphony since for that state contains the )
+    // - reactive generators will have some speed state evolution steps and longer but differed writing (NB: not very adapted to limited polyphony since for that state contains the note table)
     
+    
+    // sharing the same state for orchestra and score?  
     
     out.encapsulate("CsoundSynthesizer"){
       out.encapsulate("CsOptions"){
