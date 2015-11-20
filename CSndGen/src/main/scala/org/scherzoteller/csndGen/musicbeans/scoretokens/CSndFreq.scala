@@ -1,6 +1,8 @@
 package org.scherzoteller.csndGen.musicbeans.scoretokens
 
 import scala.beans.BeanProperty
+import org.scherzoteller.csndGen.musicbeans.scoretokens.writable.CSndWritable
+import org.scherzoteller.csndGen.generators.out.CSndOutput
 
 
 /**
@@ -9,7 +11,7 @@ import scala.beans.BeanProperty
  *
  * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters?
  */
-abstract class CSndFreq(@BeanProperty tableId: Int, @BeanProperty actionTime: Int, @BeanProperty tableSize: Int, @BeanProperty genRoutine: Int, @BeanProperty otherParams: Array[String]) extends CSndScoreToken {
+abstract class CSndFreq(@BeanProperty tableId: Int, @BeanProperty actionTime: Int, @BeanProperty tableSize: Int, @BeanProperty genRoutine: Int, @BeanProperty otherParams: Array[String]) extends CSndScoreToken with CSndWritable{
   /*
   def pitch: BigDecimal
   def pitch_=(pitch:BigDecimal)
@@ -30,6 +32,11 @@ abstract class CSndFreq(@BeanProperty tableId: Int, @BeanProperty actionTime: In
     }
     sb.toString
   }
+  
+  def writeTo(out: CSndOutput) = {
+    out.writeLn(this)
+  }
+  
 }
 
 /**
