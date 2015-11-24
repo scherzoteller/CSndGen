@@ -22,6 +22,7 @@ class DummyGeneratorTest extends AssertionsForJUnit {
 
   }
   @Test def generateAndExec() {
+    // 4306 seems to be the limit value before stackoverflow... (with default memory settings)
     val gen = new DummyGenerator(1000)
     val parentDir = "/org/scherzoteller/csdngen/files/"
     val file = new File(new File(classOf[DummyGeneratorTest].getResource(parentDir).getFile()), "dummyGeneratorTest.csd")
