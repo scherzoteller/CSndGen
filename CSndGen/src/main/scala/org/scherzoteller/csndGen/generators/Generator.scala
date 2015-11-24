@@ -17,18 +17,17 @@ import org.scherzoteller.csndGen.generators.out.CSndOutput
  * genNote should not need it anymore in the nominal case (only produced one note and nothing else)
  */
 trait Generator {
-  def genScore(out: CSndOutput, genNote: (CSndOutput, GenerationState) => CSndNote, state: GenerationState) = {
-    while (state.continueScore) {
-      {
-        val note = genNote(out, state);
-        out.writeLn(note);
-        state.noteGenerated(note);
-      }
+  def genScore(out: CSndOutput, genNote: (CSndOutput, GenerationState) => CSndNote, state: GenerationState): Unit = {
+    if (state.continueScore) {
+      val note = genNote(out, state);
+      out.writeLn(note);
+      genScore(out, genNote, state.noteGenerated(note))
     }
   }
+  
 
-  def genTablesSection(out: CSndOutput, genTables: (CSndOutput, GenerationState) => List[CSndFreq], state: GenerationState): GenerationState = {
-    val tables = genTables(out, state);
+  def genFreqTablesSection(out: CSndOutput, genFreqs: (CSndOutput, GenerationState) => List[CSndFreq], state: GenerationState): GenerationState = {
+    val tables = genFreqs(out, state);
     tables.foreach { freq => out.writeLn(freq) }
     state.tablesGenerated(tables);
   }
@@ -36,7 +35,7 @@ trait Generator {
   def generate(out: CSndOutput,
                genOrchestra: (CSndOutput, GenerationState) => Unit,
                genNote: (CSndOutput, GenerationState) => CSndNote,
-               genTables: (CSndOutput, GenerationState) => List[CSndFreq],
+               genFreqs: (CSndOutput, GenerationState) => List[CSndFreq],
                state: GenerationState) = {
     // TODO propagate state to pass immutable
     // Immutable doesn't seems so adapted to xml structure... this will force us to store string values... annoying
@@ -56,7 +55,7 @@ trait Generator {
         genOrchestra(out, state)
       }
       out.encapsulate("CsScore"){
-        genTablesSection(out, genTables, state);
+        genFreqTablesSection(out, genFreqs, state);
         genScore(out, genNote, state);
       }
     }
