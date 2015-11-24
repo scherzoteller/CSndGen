@@ -1,26 +1,22 @@
 package org.scherzoteller.csndGen.generators.impl
 
 import java.io.File
-import java.io.OutputStream
 
+import scala.BigDecimal
 import scala.util.Random
 
 import org.scherzoteller.csndGen.generators.Generator
-import org.scherzoteller.csndGen.generators.MutableGenerator
 import org.scherzoteller.csndGen.generators.out.CSndOutput
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqAdditiveGen10
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqStraightSegmentsGen7
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
-import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
+import org.scherzoteller.csndGen.musicbeans.scoretokens.writable.CSndFileOrchestra
 import org.scherzoteller.csndGen.quantizers.BasicDurationQuantizer
 import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
-import org.scherzoteller.csndGen.states.GenerationState
+import org.scherzoteller.csndGen.states.CSndTreeStateWithNoteMax
 import org.scherzoteller.csndGen.states.GenerationState
 
-class DummyGenerator extends Generator {
+class DummyGenerator(val nbNotes: Int) extends Generator[CSndTreeStateWithNoteMax] {
   def generate(out: CSndOutput) = {
     val quantizer = new ChromaticQuantizer();
     val quantum = BigDecimal("0.5");
@@ -45,9 +41,13 @@ class DummyGenerator extends Generator {
       sine :: (triangle :: (sawtooth :: (square :: Nil)))
     }
 
-    val orchestraFile = new File(DummyGenerator.this.getClass().getResource("/fourAnalogWaves.orc").getFile());
-    val state = GenerationState.nbNotesState(10); 
-    generate(out, getFileOrchestraGenerator(orchestraFile), genNote, genFreqs, state);
+    val state = CSndTreeStateWithNoteMax.nbNotesState(nbNotes)
+    // FIXME add orchestra generator in state impl... 
+    
+    
+    
+		val orchestraFile = new File(DummyGenerator.this.getClass().getResource("/fourAnalogWaves.orc").getFile());
+    generate(out, getDeferedFileOrchestraGenerator(orchestraFile), genNote, genFreqs, state);
   }
 
 }

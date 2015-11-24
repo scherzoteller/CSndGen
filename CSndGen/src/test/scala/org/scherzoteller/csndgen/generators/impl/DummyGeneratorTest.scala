@@ -22,7 +22,7 @@ class DummyGeneratorTest extends AssertionsForJUnit {
 
   }
   @Test def generateAndExec() {
-    val gen = new DummyGenerator()
+    val gen = new DummyGenerator(1000)
     val parentDir = "/org/scherzoteller/csdngen/files/"
     val file = new File(new File(classOf[DummyGeneratorTest].getResource(parentDir).getFile()), "dummyGeneratorTest.csd")
     val out = new FileOutputStream(file)

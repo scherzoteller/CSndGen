@@ -3,6 +3,7 @@ package org.scherzoteller.csndGen.states
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
+import org.scherzoteller.csndGen.musicbeans.scoretokens.writable.CSndOrchestra
 
 /**
  * Booooohhhhh this is mutable, non functional, not pretty, caca prout...
@@ -27,6 +28,7 @@ class DodecaphonicGeneratorState extends GenerationState {
     this.tables = tables
     this
   }
+  def orchestraGenerated(orchestra: CSndOrchestra): GenerationState = { this }
 }
 
 

@@ -33,7 +33,7 @@ abstract class CSndFreq(@BeanProperty tableId: Int, @BeanProperty actionTime: In
     sb.toString
   }
   
-  def writeTo(out: CSndOutput) = {
+  def writeTo(out: CSndOutput): Unit = {
     out.writeLn(this)
   }
   

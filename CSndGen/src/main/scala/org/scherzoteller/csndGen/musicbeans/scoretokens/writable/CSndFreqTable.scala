@@ -6,13 +6,25 @@ import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 
 class CSndFreqTable(val freqs: List[CSndFreq]) extends CSndWritable {
   def writeTo(out: CSndOutput) = {
-    if(freqs != Nil){
-    	freqs.head.writeTo(out)
+    if (freqs != Nil) {
+      freqs.head.writeTo(out)
       new CSndFreqTable(freqs.tail).writeTo(out)
     }
   }
-  
+
   def append(freq: CSndFreq): CSndFreqTable = {
     new CSndFreqTable(freqs :+ freq)
   }
+
+  
+  
+  override def toString(): String = {
+    "CSndFreqTable[" + freqs + "]"
+  }
+
+}
+
+object CSndFreqTable {
+  val _nilObject = new CSndFreqTable(Nil)
+  def nilObject = _nilObject
 }
