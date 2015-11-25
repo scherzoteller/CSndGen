@@ -3,14 +3,14 @@ package org.scherzoteller.csndGen.quantizers
 import scala.beans.BeanProperty
 import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
 import org.slf4j.LoggerFactory
-import org.scherzoteller.csndGen.states.DodecaphonicGeneratorState
+import org.scherzoteller.csndGen.generators.states.DodecaphonicGeneratorState
 
 object LimitedPolyphonyDurationQuantizer {
   val LOG = LoggerFactory.getLogger(classOf[LimitedPolyphonyDurationQuantizer])
 }
 
-class LimitedPolyphonyDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanProperty maxDurationInQuantum: Int,
-                                        @BeanProperty isZeroAllowed: Boolean, @BeanProperty totalDuration: Int, @BeanProperty maxPolyphony: Int)
+class LimitedPolyphonyDurationQuantizer(durationQuantum: BigDecimal, maxDurationInQuantum: Int,
+                                        isZeroAllowed: Boolean, totalDuration: Int, maxPolyphony: Int)
   extends StatefulBasicDurationQuantizer(durationQuantum, maxDurationInQuantum, isZeroAllowed, totalDuration) {
 
   // TODO ((nothing to do with this class ;-)) http://bcomposes.wordpress.com/2012/05/04/basic-xml-processing-with-scala/

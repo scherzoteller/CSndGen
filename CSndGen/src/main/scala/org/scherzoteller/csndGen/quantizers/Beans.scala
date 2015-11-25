@@ -5,5 +5,5 @@ import scala.beans.BeanProperty
 
 
 
-class CircularSearchResult(@BeanProperty maxNbQuantum: Int, @BeanProperty askedNbQuantum: Int, @BeanProperty positionWhereFound: Int){
+class CircularSearchResult(maxNbQuantum: Int, askedNbQuantum: Int, positionWhereFound: Int){
 }

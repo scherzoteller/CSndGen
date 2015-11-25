@@ -3,15 +3,15 @@ package org.scherzoteller.csndGen.generators.impl
 import java.io.File
 import java.io.OutputStream
 import scala.util.Random
-import org.scherzoteller.csndGen.states.GenerationState
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqAdditiveGen10
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqStraightSegmentsGen7
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
 import org.scherzoteller.csndGen.quantizers.LimitedPolyphonyDurationQuantizer
-import org.scherzoteller.csndGen.states.DodecaphonicGeneratorState
 import org.scherzoteller.csndGen.generators.MutableGenerator
+import org.scherzoteller.csndGen.generators.states.DodecaphonicGeneratorState
+import org.scherzoteller.csndGen.generators.states.GeneratorState
 
 /**
  * this is actually a simple copy of DummyGenerator with quantized values (will match tempered notes)
@@ -20,14 +20,14 @@ import org.scherzoteller.csndGen.generators.MutableGenerator
  * With the quantum based quantizer, we will be able to manage it with an array/list of remaining 
  * 
  */
-class DodecaphonicLimitedPolyphonyGenerator extends MutableGenerator {
+class DodecaphonicLimitedPolyphonyGenerator extends MutableGenerator[DodecaphonicGeneratorState] {
   def generate(out: OutputStream) = {
     val quantizer = new ChromaticQuantizer();
     val quantum = BigDecimal("0.5");
     val totalDuration = 140;
     val durationQuantizer = new LimitedPolyphonyDurationQuantizer(quantum, 8, true, totalDuration, 5);
 
-    val genNote = (out: OutputStream, state: GenerationState) => {
+    val genNote = (out: OutputStream, state: DodecaphonicGeneratorState) => {
       val instrument = Random.nextInt(4) + 1;
       val start = durationQuantizer.getQuantizedStart();
       val startStr = String.valueOf(start);
@@ -37,7 +37,7 @@ class DodecaphonicLimitedPolyphonyGenerator extends MutableGenerator {
       new CSndNote(instrument, startStr, duration, pitch, amplitude)
     }
 
-    val genFreqs = (out: OutputStream, state: GenerationState) => {
+    val genFreqs = (out: OutputStream, state: DodecaphonicGeneratorState) => {
       val sine = new CSndFreqAdditiveGen10(1, 0, 4096, Array("1"))
       val triangle = new CSndFreqStraightSegmentsGen7(2, 0, 16384, Array("0", "4096", "1", "8192", "-1", "4097", "0"))
       val sawtooth = new CSndFreqStraightSegmentsGen7(3, 0, 16384, Array("-1", "16385", "1"))

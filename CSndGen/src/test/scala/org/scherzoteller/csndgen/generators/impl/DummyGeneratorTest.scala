@@ -36,4 +36,19 @@ class DummyGeneratorTest extends AssertionsForJUnit {
     assertEquals("exit code is not 0", 0, executor.exec());
     SpectrogramUtils.renderSpectrogramFile(executor.getWavFileName())
   }
+  @Test def generateAndExecEmptyFile() {
+	  // 4306 seems to be the limit value before stackoverflow... (with default memory settings)
+	  val gen = new DummyGenerator(0)
+	  val parentDir = "/org/scherzoteller/csdngen/files/"
+	  val file = new File(new File(classOf[DummyGeneratorTest].getResource(parentDir).getFile()), "dummyGeneratorTestEmptyFile.csd")
+	  val out = new FileOutputStream(file)
+	  gen.generate(new CSndOutput(out))
+	  out.close()
+	  val genFileContent = IOUtils.toString(new FileInputStream(file))
+	  assertNotNull("File is empty", genFileContent)
+	  assertTrue("File is empty", genFileContent.length() > 0)
+	  val executor = new CSoundExec(file, false)
+	  assertEquals("exit code is not 0", 0, executor.exec());
+	  SpectrogramUtils.renderSpectrogramFile(executor.getWavFileName())
+  }
 }

@@ -15,7 +15,7 @@ import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
  * Note that polyrhythms can be be achieved with either several quantizers or getUnQuantizedInBoundRandowValue()
  * Musical quantizer would only help to provide a "valid" measure count (bouhhh traditional music is obsolete..., let's do polyrhytms, dodecaphonic pieces without fixed metrics...)
  */
-class BasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanProperty maxDurationInQuantum: Int, @BeanProperty isZeroAllowed: Boolean, @BeanProperty totalDuration: Int) extends Quantizer {
+class BasicDurationQuantizer(durationQuantum: BigDecimal, maxDurationInQuantum: Int, isZeroAllowed: Boolean, totalDuration: Int) extends Quantizer {
   //  
 
   def getAllowedVals(): Array[BigDecimal] = {

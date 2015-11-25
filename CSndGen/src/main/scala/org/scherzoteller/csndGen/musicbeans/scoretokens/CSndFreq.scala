@@ -11,7 +11,7 @@ import org.scherzoteller.csndGen.generators.out.CSndOutput
  *
  * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters?
  */
-abstract class CSndFreq(@BeanProperty tableId: Int, @BeanProperty actionTime: Int, @BeanProperty tableSize: Int, @BeanProperty genRoutine: Int, @BeanProperty otherParams: Array[String]) extends CSndScoreToken with CSndWritable{
+abstract class CSndFreq(tableId: Int, actionTime: Int, tableSize: Int, genRoutine: Int, otherParams: Array[String]) extends CSndScoreToken with CSndWritable{
   /*
   def pitch: BigDecimal
   def pitch_=(pitch:BigDecimal)
@@ -47,7 +47,7 @@ abstract class CSndFreq(@BeanProperty tableId: Int, @BeanProperty actionTime: In
  * f4 0 16384 10 1 1   1   1    0.7 0.5   0.3  0.1          ; nearly Pulse
  * 
  */
-class CSndFreqAdditiveGen10(@BeanProperty tableId: Int, @BeanProperty actionTime: Int, @BeanProperty tableSize: Int, @BeanProperty partialStrength: Array[String]) extends CSndFreq(tableId, actionTime, tableSize, 10, partialStrength) {
+class CSndFreqAdditiveGen10(tableId: Int, actionTime: Int, tableSize: Int, partialStrength: Array[String]) extends CSndFreq(tableId, actionTime, tableSize, 10, partialStrength) {
 
 }
 
@@ -68,6 +68,6 @@ class CSndFreqAdditiveGen10(@BeanProperty tableId: Int, @BeanProperty actionTime
  * 2nd segment goes from y=1 to y=-1 and is 0 width (vertical falling segment)
  * 3rd segment foes from y=-1 to y=0 and is 512 width (oblic rising segment with same angle as 1st)
  */
-class CSndFreqStraightSegmentsGen7(@BeanProperty tableId: Int, @BeanProperty actionTime: Int, @BeanProperty tableSize: Int, @BeanProperty segmentDef: Array[String]) extends CSndFreq(tableId, actionTime, tableSize, 7, segmentDef) {
+class CSndFreqStraightSegmentsGen7(tableId: Int, actionTime: Int, tableSize: Int, segmentDef: Array[String]) extends CSndFreq(tableId, actionTime, tableSize, 7, segmentDef) {
 
 }

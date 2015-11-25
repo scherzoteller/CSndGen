@@ -1,15 +1,12 @@
-package org.scherzoteller.csndGen.states
+package org.scherzoteller.csndGen.generators.states
 
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreq
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
 import org.scherzoteller.csndGen.musicbeans.scoretokens.writable.CSndOrchestra
+import scala.collection.immutable.Nil
 
-/**
- * Booooohhhhh this is mutable, non functional, not pretty, caca prout...
- * How do you manage state with stateless code?? that's a philosophical question... I'll let Haskellers and other pure functional language aficionados answer
- */
-class DodecaphonicGeneratorState extends GenerationState {
+class DodecaphonicGeneratorState extends GeneratorState {
   var lastNote: CSndNotePlacement = CSndNotePlacement.nilObject()
 
   var nbNotesToGen: Int = 150
@@ -19,8 +16,8 @@ class DodecaphonicGeneratorState extends GenerationState {
     return nbNotesToGen > 0;
   }
 
-  def noteGenerated(note: CSndNote) = {
-    nbNotesToGen = nbNotesToGen - 1;
+  def noteGenerated(note: CSndNote): GeneratorState = {
+    nbNotesToGen=nbNotesToGen -1
     this
   }
 
@@ -28,7 +25,9 @@ class DodecaphonicGeneratorState extends GenerationState {
     this.tables = tables
     this
   }
-  def orchestraGenerated(orchestra: CSndOrchestra): GenerationState = { this }
+  def orchestraGenerated(orchestra: CSndOrchestra): GeneratorState = { 
+    this 
+  }
 }
 
 

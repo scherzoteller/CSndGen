@@ -11,7 +11,7 @@ import org.scherzoteller.csndGen.generators.out.CSndOutput
  *
  * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters?
  */
-class CSndNote(@BeanProperty instrId: Int, @BeanProperty start: String, @BeanProperty duration: BigDecimal, @BeanProperty otherParams: Array[String]) extends CSndNotePlacement(start.toInt, duration) with CSndWritable with CSndScoreToken {
+class CSndNote(instrId: Int, start: String, duration: BigDecimal, otherParams: Array[String]) extends CSndNotePlacement(start.toInt, duration) with CSndWritable with CSndScoreToken {
   /*
   def pitch: BigDecimal
   def pitch_=(pitch:BigDecimal)

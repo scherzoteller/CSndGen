@@ -1,11 +1,8 @@
 package org.scherzoteller.csndGen.generators.impl
 
 import java.io.File
-
 import scala.BigDecimal
 import scala.util.Random
-
-import org.scherzoteller.csndGen.generators.Generator
 import org.scherzoteller.csndGen.generators.out.CSndOutput
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqAdditiveGen10
 import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndFreqStraightSegmentsGen7
@@ -13,17 +10,17 @@ import org.scherzoteller.csndGen.musicbeans.scoretokens.CSndNote
 import org.scherzoteller.csndGen.musicbeans.scoretokens.writable.CSndFileOrchestra
 import org.scherzoteller.csndGen.quantizers.BasicDurationQuantizer
 import org.scherzoteller.csndGen.quantizers.ChromaticQuantizer
-import org.scherzoteller.csndGen.states.CSndTreeStateWithNoteMax
-import org.scherzoteller.csndGen.states.GenerationState
+import org.scherzoteller.csndGen.generators.states.TreeGeneratorStateWithNoteMax
+import org.scherzoteller.csndGen.generators.ImmutableGenerator
 
-class DummyGenerator(val nbNotes: Int) extends Generator[CSndTreeStateWithNoteMax] {
+class DummyGenerator(val nbNotes: Int) extends ImmutableGenerator[TreeGeneratorStateWithNoteMax] {
   def generate(out: CSndOutput) = {
     val quantizer = new ChromaticQuantizer();
     val quantum = BigDecimal("0.5");
     val totalDuration = 70;
     val durationQuantizer = new BasicDurationQuantizer(quantum, 8, true, totalDuration);
 
-    val genNote = (out: CSndOutput, state: GenerationState) => {
+    val genNote = (out: CSndOutput, state: TreeGeneratorStateWithNoteMax) => {
       val instrument = Random.nextInt(4) + 1;
       val start = durationQuantizer.getQuantizedStart();
       val startStr = String.valueOf(start);
@@ -33,7 +30,7 @@ class DummyGenerator(val nbNotes: Int) extends Generator[CSndTreeStateWithNoteMa
       new CSndNote(instrument, startStr, duration, pitch, amplitude)
     }
 
-    val genFreqs = (out: CSndOutput, state: GenerationState) => {
+    val genFreqs = (out: CSndOutput, state: TreeGeneratorStateWithNoteMax) => {
       val sine = new CSndFreqAdditiveGen10(1, 0, 4096, Array("1"))
       val triangle = new CSndFreqStraightSegmentsGen7(2, 0, 16384, Array("0", "4096", "1", "8192", "-1", "4097", "0"))
       val sawtooth = new CSndFreqStraightSegmentsGen7(3, 0, 16384, Array("-1", "16385", "1"))
@@ -41,7 +38,7 @@ class DummyGenerator(val nbNotes: Int) extends Generator[CSndTreeStateWithNoteMa
       sine :: (triangle :: (sawtooth :: (square :: Nil)))
     }
 
-    val state = CSndTreeStateWithNoteMax.nbNotesState(nbNotes)
+    val state = TreeGeneratorStateWithNoteMax.nbNotesState(nbNotes)
     // FIXME add orchestra generator in state impl... 
     
     

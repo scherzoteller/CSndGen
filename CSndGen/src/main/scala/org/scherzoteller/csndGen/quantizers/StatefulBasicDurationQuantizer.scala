@@ -3,7 +3,7 @@ package org.scherzoteller.csndGen.quantizers
 import scala.beans.BeanProperty
 import org.scherzoteller.csndGen.musicbeans.CSndNotePlacement
 
-class StatefulBasicDurationQuantizer(@BeanProperty durationQuantum: BigDecimal, @BeanProperty maxDurationInQuantum: Int, @BeanProperty isZeroAllowed: Boolean, @BeanProperty totalDuration: Int)
+class StatefulBasicDurationQuantizer(durationQuantum: BigDecimal, maxDurationInQuantum: Int, isZeroAllowed: Boolean, totalDuration: Int)
   extends BasicDurationQuantizer(durationQuantum, maxDurationInQuantum, isZeroAllowed, totalDuration) {
   @BeanProperty
   protected val quantumFill: Array[Int] = StatefulBasicDurationQuantizer.initQuantumFill(totalDuration);;

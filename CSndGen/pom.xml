@@ -1,165 +1,167 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.scherzoteller</groupId>
-  <artifactId>csndgen</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <inceptionYear>2008</inceptionYear>
-  <properties>
-    <scala.version>2.11.0</scala.version>
-    <scalaBinaryVersion>2.11</scalaBinaryVersion>
-    <log4j.level.default>INFO</log4j.level.default>
-    <log4j.level.sql.default>ERROR</log4j.level.sql.default>
-  </properties>
-  
-  <!-- 
-       Generated but updated (higher scala version)from
-       http://www.scala-blogs.org/2008/01/maven-for-scala.html
-       mvn org.apache.maven.plugins:maven-archetype-plugin:1.0-alpha-7:create \
-       -DarchetypeGroupId=org.scala-tools.archetypes \
-       -DarchetypeArtifactId=scala-archetype-simple \
-       -DarchetypeVersion=1.1 \
-       -DremoteRepositories=http://scala-tools.org/repo-releases \
-       -DgroupId=your.proj.gid -DartifactId=your-proj-id
-  -->
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.scherzoteller</groupId>
+	<artifactId>csndgen</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<inceptionYear>2008</inceptionYear>
+	<properties>
+		<scala.version>2.11.0</scala.version>
+		<scalaBinaryVersion>2.11</scalaBinaryVersion>
+		<log4j.level.default>INFO</log4j.level.default>
+		<log4j.level.sql.default>ERROR</log4j.level.sql.default>
+	</properties>
 
-  <repositories>
-    <repository>
-      <id>scala-tools.org</id>
-      <name>Scala-Tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases</url>
-    </repository>
-  </repositories>
+	<!-- Generated but updated (higher scala version)from http://www.scala-blogs.org/2008/01/maven-for-scala.html 
+		mvn org.apache.maven.plugins:maven-archetype-plugin:1.0-alpha-7:create \ 
+		-DarchetypeGroupId=org.scala-tools.archetypes \ -DarchetypeArtifactId=scala-archetype-simple 
+		\ -DarchetypeVersion=1.1 \ -DremoteRepositories=http://scala-tools.org/repo-releases 
+		\ -DgroupId=your.proj.gid -DartifactId=your-proj-id -->
 
-  <pluginRepositories>
-    <pluginRepository>
-      <id>scala-tools.org</id>
-      <name>Scala-Tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases</url>
-    </pluginRepository>
-  </pluginRepositories>
+	<repositories>
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-Tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</repository>
+	</repositories>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
-      <version>${scala.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_${scalaBinaryVersion}</artifactId>
-      <version>2.2.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>1.3.2</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-      <version>3.2.1</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-configuration</groupId>
-      <artifactId>commons-configuration</artifactId>
-      <version>1.6</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.6</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.6.4</version>
-    </dependency>
-    <!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>jcl-over-slf4j</artifactId> 
-	 <version>1.6.4</version> </dependency> -->
-	 
-	<dependency>
-		<groupId>com.typesafe.akka</groupId>
-		<artifactId>akka-actor_2.11</artifactId>
-		<version>2.4.0</version>
-	</dependency>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-Tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
 
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.16</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.musicg.api</groupId>
-      <artifactId>musig</artifactId>
-      <version>1.4.2.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/nonMavenLibs/musicg-1.4.2.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>com.musicg.api</groupId>
-      <artifactId>musig-graphic</artifactId>
-      <version>1.4.2.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/nonMavenLibs/musicg-graphic-1.3.0.0.jar</systemPath>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.scalatest</groupId>
+			<artifactId>scalatest_${scalaBinaryVersion}</artifactId>
+			<version>2.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>apache-log4j-extras</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor_2.11</artifactId>
+			<version>2.4.0</version>
+		</dependency>
 
-  <build>
-    <sourceDirectory>src/main/scala</sourceDirectory>
-    <testSourceDirectory>src/test/scala</testSourceDirectory>
-    <plugins>
-      <plugin>
-	<groupId>org.scala-tools</groupId>
-	<artifactId>maven-scala-plugin</artifactId>
-	<executions>
-	  <execution>
-	    <goals>
-	      <goal>compile</goal>
-	      <goal>testCompile</goal>
-	    </goals>
-	  </execution>
-	</executions>
-	<configuration>
-	  <scalaVersion>${scala.version}</scalaVersion>
-	</configuration>
-      </plugin>
-      <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-eclipse-plugin</artifactId>
-	<configuration>
-	  <downloadSources>true</downloadSources>
-	  <buildcommands>
-	    <buildcommand>ch.epfl.lamp.sdt.core.scalabuilder</buildcommand>
-	  </buildcommands>
-	  <additionalProjectnatures>
-	    <projectnature>ch.epfl.lamp.sdt.core.scalanature</projectnature>
-	  </additionalProjectnatures>
-	  <classpathContainers>
-	    <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
-	    <classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
-	  </classpathContainers>
-	</configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <reporting>
-    <plugins>
-      <plugin>
-	<groupId>org.scala-tools</groupId>
-	<artifactId>maven-scala-plugin</artifactId>
-	<configuration>
-	  <scalaVersion>${scala.version}</scalaVersion>
-	</configuration>
-      </plugin>
-    </plugins>
-  </reporting>
+		<dependency>
+			<groupId>com.musicg.api</groupId>
+			<artifactId>musig</artifactId>
+			<version>1.4.2.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/nonMavenLibs/musicg-1.4.2.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.musicg.api</groupId>
+			<artifactId>musig-graphic</artifactId>
+			<version>1.4.2.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/nonMavenLibs/musicg-graphic-1.3.0.0.jar</systemPath>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+		<testSourceDirectory>src/test/scala</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<scalaVersion>${scala.version}</scalaVersion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<buildcommands>
+						<buildcommand>ch.epfl.lamp.sdt.core.scalabuilder</buildcommand>
+					</buildcommands>
+					<additionalProjectnatures>
+						<projectnature>ch.epfl.lamp.sdt.core.scalanature</projectnature>
+					</additionalProjectnatures>
+					<classpathContainers>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+						<classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
+					</classpathContainers>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<configuration>
+					<scalaVersion>${scala.version}</scalaVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>

@@ -8,10 +8,10 @@ import scala.beans.BeanProperty
  * 
  * @see http://stackoverflow.com/questions/13635554/how-to-handle-null-input-parameters-in-scala: I know in Scala a method should never return null... but what's about input parameters?
  * 
- * FIXME those @BeanProperty annotations cause warning and eclipse doesn't see them !!!!
+ * FIXME those annotations cause warning and eclipse doesn't see them !!!!
  *  
  */
-class CSndNotePlacement(@BeanProperty start: Int, @BeanProperty duration: BigDecimal) { 
+class CSndNotePlacement(start: Int, duration: BigDecimal) { 
   def getDuration: BigDecimal = this.duration // FIXME to remove when found a workaround for eclipse
   def getStart: Int = this.start // FIXME to remove when found a workaround for eclipse
 }

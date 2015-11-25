@@ -5,8 +5,14 @@ import com.musicg.wave.extension.Spectrogram
 import com.musicg.graphic.GraphicRender
 import org.apache.commons.io.FilenameUtils
 import java.io.File
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
+class SpectrogramUtils {
+  
+}
 object SpectrogramUtils {
+  val  LOG: Logger = LoggerFactory.getLogger(classOf[SpectrogramUtils]);
   // see also http://spek.cc/... more beautiful!
   def renderSpectrogramFile(waveIn: String, imgOut: String, fftSampleSize: Int, overlapFactor: Int) = {
     val wave = new Wave(waveIn)
@@ -16,7 +22,10 @@ object SpectrogramUtils {
     //render.renderSpectrogram(spectrogram, imgOut)
     
     val spData =  spectrogram.getAbsoluteSpectrogramData()
-    render.renderSpectrogramData(spData, imgOut);
+    if(spData.length > 0)
+      render.renderSpectrogramData(spData, imgOut);
+    else
+      LOG.warn("empty wav, nothing to render")
   }
   def renderSpectrogramFile(waveIn: String, imgOut: String): Unit = {
     renderSpectrogramFile(waveIn, imgOut, 1024, 2)
