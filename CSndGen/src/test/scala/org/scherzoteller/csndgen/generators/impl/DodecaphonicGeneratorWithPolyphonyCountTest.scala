@@ -17,6 +17,7 @@ import java.io.FileInputStream
 import org.scherzoteller.csndGen.spectrogram.SpectrogramUtils
 import org.scherzoteller.csndGen.generators.impl.DodecaphonicLimitedPolyphonyGenerator
 import org.scherzoteller.csndGen.generators.impl.DodecaphonicGeneratorWithPolyphonyCount
+import org.scherzoteller.csndGen.generators.out.CSndOutput
 
 class DodecaphonicGeneratorWithPolyphonyCountTest extends AssertionsForJUnit {
   @Before def initialize() {
@@ -27,7 +28,7 @@ class DodecaphonicGeneratorWithPolyphonyCountTest extends AssertionsForJUnit {
     val parentDir = "/org/scherzoteller/csdngen/files/"
     val file = new File(new File(classOf[DodecaphonicGeneratorWithPolyphonyCount].getResource(parentDir).getFile()), "dodecaphonicGeneratorWithPolyphonyCount.csd")
     val out = new FileOutputStream(file)
-    gen.generate(out)
+    gen.generate(new CSndOutput(out))
     out.close()
     val genFileContent = IOUtils.toString(new FileInputStream(file))
     assertNotNull("File is empty", genFileContent)

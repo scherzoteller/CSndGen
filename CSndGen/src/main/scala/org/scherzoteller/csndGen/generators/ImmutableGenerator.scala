@@ -68,12 +68,6 @@ trait ImmutableGenerator[T <: TreeGeneratorState] extends Generator[T] {
         finalWrite),
       out, state);
   }
-  /**
-   * To be redefined usually by a call to
-   * {@link Generator#generate(out: OutputStream, genOrchestra: (OutputStream, GenerationState) => Unit, genNote: (OutputStream, GenerationState) => Note, state: GenerationState)}
-   *
-   */
-  override def generate(out: CSndOutput)
 
   def getDeferedFileOrchestraGenerator(scoreFile: File): (CSndOutput, T) => T =
 	  {

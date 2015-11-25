@@ -12,6 +12,7 @@ class CSndOutput(output: OutputStream) {
 	val END_OF_LINE = "\r\n";
   val END_OF_INSTRUCTION = ";"+END_OF_LINE;
   def write(note: CSndScoreToken) = {
+    // FIXME Findbugs would say that this is default encoding dependent...
     output.write(note.getValueAsString().getBytes());
   }
 
