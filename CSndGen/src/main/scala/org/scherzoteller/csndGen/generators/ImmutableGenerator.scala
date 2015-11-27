@@ -11,12 +11,14 @@ import org.scherzoteller.csndGen.musicbeans.scoretokens.writable.CSndFileOrchest
 import org.scherzoteller.csndGen.generators.states.TreeGeneratorState
 
 /**
- * TODO refacto: lots of functions have access to the OutputStream, see if we could abstract it.
- * TODO refacto bis: rethink in functional immutable way...
  * Build a hierarchy of CSoundTokens That will contain ne Note(rename to CSound Note, correspond to the i statement)
  *
  * genNote should not need it anymore in the nominal case (only produced one note and nothing else)
+ * 
+ * @author vloret
+ * @see MutableGenerator => managing Immutable State is really stack consuming (no? you think?)
  */
+@Deprecated
 trait ImmutableGenerator[T <: TreeGeneratorState] extends Generator[T] {
   override def genScore(out: CSndOutput, genNote: (CSndOutput, T) => CSndNote, state: T): T = {
     if (state.continueScore) {

@@ -10,11 +10,14 @@ import org.scherzoteller.csndGen.generators.states.GeneratorState
 import org.scherzoteller.csndGen.generators.out.CSndOutput
 
 /**
- * TODO refacto: lots of functions have access to the OutputStream, see if we could abstract it.
- * TODO refacto bis: rethink in functional immutable way...
  * Build a hierarchy of CSoundTokens That will contain ne Note(rename to CSound Note, correspond to the i statement)
  *
  * genNote should not need it anymore in the nominal case (only produced one note and nothing else)
+ * 
+ * http://www.csounds.com/manual/html/ftgen.html => with that syntax, we should be able to include frequency in orchestra instead of score
+ * (cf. http://iainmccurdy.org/CsoundRealtimeExamples/Cabbage/Synths/WavetableSynth.csd !!!)
+ * (list of files here http://iainmccurdy.org/csound.html)
+ * 
  */
 @Deprecated
 trait MutableGenerator[T <: GeneratorState] extends Generator[T] {
@@ -32,10 +35,6 @@ trait MutableGenerator[T <: GeneratorState] extends Generator[T] {
   override def genFreqTablesSection(out: CSndOutput, genTables: (CSndOutput, T) => List[CSndFreq], state: T): T = {
     val tables = genTables(out, state);
     tables.foreach { freq => out.writeLn(freq) }
-    //    out.write(tables.map((freq) => {freq.getValueAsString()}).mkString(";\r\n").getBytes());
-    //    out.write(';');
-    //    out.write('\r');
-    //    out.write('\n')
     state.tablesGenerated(tables).asInstanceOf[T];
   }
 
