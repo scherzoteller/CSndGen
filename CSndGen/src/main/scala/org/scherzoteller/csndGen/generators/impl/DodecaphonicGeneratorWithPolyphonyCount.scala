@@ -32,11 +32,14 @@ class DodecaphonicGeneratorWithPolyphonyCount extends MutableGenerator[Dodecapho
     val totalDuration = 140;
     val durationQuantizer = new StatefulBasicDurationQuantizer(quantum, 8, true, totalDuration);
 
+
     val genNote = (out: CSndOutput, state: DodecaphonicGeneratorState) => {
       val instrument = Random.nextInt(4) + 1;
       val start = durationQuantizer.getQuantizedStart();
       val startStr = String.valueOf(start);
       val duration = durationQuantizer.getValidDuration(start);
+
+
       val pitch = quantizer.getRandowValue();
       val amplitude = quantizer.getUnQuantizedInBoundRandowValue(); // create seeders for amplitude
       new CSndNote(instrument, startStr, duration, pitch, amplitude)
@@ -50,18 +53,7 @@ class DodecaphonicGeneratorWithPolyphonyCount extends MutableGenerator[Dodecapho
       sine :: triangle :: sawtooth :: square :: Nil
     }
 
-    val orchestraFile = new File(this.getClass().getResource("/fourAnalogWaves.orc").getFile());
-    val state = new DodecaphonicGeneratorState();
-    generate(out, getFileOrchestraGenerator(orchestraFile), genNote, genFreqs, state);
-    
-    val qFill = durationQuantizer.getQuantumFill()
-    val sb = new StringBuilder("[");
-    for(i<- 0 until qFill.length){
-      sb.append(qFill(i))
-      if(i != qFill.length-1) sb.append(", ") 
-    }
-    sb.append("]")
-    System.err.println(sb);
+    generate(out, getFileOrchestraGenerator("/fourAnalogWaves.orc"), genNote, genFreqs, new DodecaphonicGeneratorState());
+    System.err.println("display state: ["+durationQuantizer.getQuantumFill().toStream.mkString(", ")+"]");
   }
-
 }

@@ -18,7 +18,6 @@ import org.scherzoteller.csndGen.generators.states.TreeGeneratorState
  * @author vloret
  * @see MutableGenerator => managing Immutable State is really stack consuming (no? you think?)
  */
-@Deprecated
 trait ImmutableGenerator[T <: TreeGeneratorState] extends Generator[T] {
   override def genScore(out: CSndOutput, genNote: (CSndOutput, T) => CSndNote, state: T): T = {
     if (state.continueScore) {

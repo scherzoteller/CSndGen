@@ -45,18 +45,8 @@ class DodecaphonicLimitedPolyphonyGenerator extends MutableGenerator[Dodecaphoni
       sine :: triangle :: sawtooth :: square :: Nil
     }
 
-    val orchestraFile = new File(this.getClass().getResource("/fourAnalogWaves.orc").getFile());
-    val state = new DodecaphonicGeneratorState();
-    generate(out, getFileOrchestraGenerator(orchestraFile), genNote, genFreqs, state);
-    
-    val qFill = durationQuantizer.getQuantumFill()
-    val sb = new StringBuilder("[");
-    for(i<- 0 until qFill.length){
-      sb.append(qFill(i))
-      if(i != qFill.length-1) sb.append(", ") 
-    }
-    sb.append("]")
-    System.err.println(sb);
+    generate(out, getFileOrchestraGenerator("/fourAnalogWaves.orc"), genNote, genFreqs, new DodecaphonicGeneratorState());
+    System.err.println("display state: ["+durationQuantizer.getQuantumFill().toStream.mkString(", ")+"]");
   }
 
 }

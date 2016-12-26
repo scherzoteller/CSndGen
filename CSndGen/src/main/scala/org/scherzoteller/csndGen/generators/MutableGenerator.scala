@@ -19,7 +19,6 @@ import org.scherzoteller.csndGen.generators.out.CSndOutput
  * (list of files here http://iainmccurdy.org/csound.html)
  * 
  */
-@Deprecated
 trait MutableGenerator[T <: GeneratorState] extends Generator[T] {
   override def genScore(out: CSndOutput, genNote: (CSndOutput, T) => CSndNote, state: T): T = {
     while (state.continueScore) {
@@ -61,5 +60,9 @@ trait MutableGenerator[T <: GeneratorState] extends Generator[T] {
     {
       return (out: CSndOutput, state: T) => { out.writeFile(scoreFile); state };
     }
-  
+
+  def getFileOrchestraGenerator(filename: String) : (CSndOutput, T) => T =
+  {
+    return getFileOrchestraGenerator(new File(this.getClass().getResource(filename).getFile()))
+  }
 }

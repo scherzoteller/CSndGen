@@ -1,6 +1,4 @@
-
 import scala.util.Random
-import org.apache.commons.io.FileUtils
 
 object essai {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet

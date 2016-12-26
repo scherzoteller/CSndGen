@@ -16,7 +16,6 @@ import org.scherzoteller.csndGen.generators.out.CSndOutput
  * 
  * genNote should not need it anymore in the nominal case (only produced one note and nothing else) 
  */
-@Deprecated
 trait Generator[T <: GeneratorState] {
   def genScore(out: CSndOutput, genNote: (CSndOutput, T) => CSndNote, state: T): T;
 
